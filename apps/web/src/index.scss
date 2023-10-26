@@ -1,0 +1,121 @@
+@import 'styles';
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.floating-input > input::placeholder {
+  color: transparent;
+}
+
+.floating-input > input:focus,
+.floating-input > input:not(:placeholder-shown) {
+  @apply pt-8;
+}
+
+.floating-input > input:focus ~ label,
+.floating-input > input:not(:placeholder-shown) ~ label {
+  @apply -translate-y-4 translate-x-[2px] scale-75 opacity-75;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
+  -webkit-box-shadow: 0 0 0 1000px $_color-white inset;
+}
+
+// signup and signin
+#form-signup,
+#form-signin,
+#form-profil,
+#form-forgot-password,
+#form-reset-password {
+  input {
+    background-color: $_color-white;
+    color: $_color-black;
+  }
+  label {
+    color: $_color-black;
+  }
+}
+
+body {
+  overflow: hidden;
+}
+
+$header-height-desktop: 130px;
+
+// menu button
+$header-menu-button-width: 70px;
+
+/*
+ * Sidebar
+ */
+
+$sidebar-width: 280px;
+
+.sidebar {
+  .nav {
+    padding-right: _rem(map-get($_layout-grid, gutters));
+    padding-left: _rem(map-get($_layout-grid, gutters));
+  }
+}
+
+.sidebar-heading {
+  font-size: 0.75rem;
+}
+
+/*
+ * Navbar
+ */
+
+nav.navbar {
+  padding-right: 0;
+}
+
+.navbar {
+  border-color: hsla(0, 0%, 100%, 0.1);
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
+  background-color: var(--color-navbar-bg);
+  @include bp(smallest) {
+    margin-left: auto;
+    width: calc(100vw - $sidebar-width);
+  }
+
+  @include bp(large) {
+    height: $header-height-desktop / 2;
+    padding-right: $header-menu-button-width;
+
+    transition: height 300ms ease;
+
+    justify-content: space-around;
+    align-items: center;
+  }
+  @include bp(large) {
+    font-size: 12px;
+  }
+  @include bp(1200px) {
+    font-size: 14px;
+  }
+  @include bp(1300px) {
+    font-size: 16px;
+  }
+
+  width: 100vw;
+}
+
+//
+html,
+body {
+  background-color: var(--color-bg) !important;
+}
+
+.error-text {
+  color: var(--color-error);
+}

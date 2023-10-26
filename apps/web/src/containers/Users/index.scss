@@ -1,0 +1,17 @@
+.sidebar {
+  + .o-zone:has(.c-user-list) {
+    padding-top: 0 !important;
+    padding-left: 280px !important;
+  }
+}
+
+.o-zone:has(.c-user-list) {
+  --tw-text-opacity: 1;
+  padding-right: 0 !important;
+  .o-grid {
+    max-width: initial;
+    padding-top: 0;
+    padding-left: 0;
+    padding-right: 0;
+  }
+}

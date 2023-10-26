@@ -1,0 +1,167 @@
+// ==========================================================================
+// VARIABLES
+// ==========================================================================
+
+// Color swatch
+$_color-red: #ff003c !default;
+$_color-white: #FFFFFF !default;
+$_color-grey: #bebebe !default;
+$_color-grey-light: #d8d8d8 !default;
+$_color-grey-dark: #414141 !default;
+$_color-black: #000000 !default;
+$_color-brand: $_color-red !default;
+$_color-links: $_color-black !default;
+$_color-golden: #e6d600 !default;
+$_color-thema: (
+  data: $_color-golden
+) !default;
+$_color-backdrop: darken($_color-grey-dark, 10%) !default;
+// Base
+// ==========================================================================
+
+// Typography
+$_base-font-size: 16px !default;
+$_base-font-line-height: 1.5 !default;
+$_base-font-space: $_base-font-size * $_base-font-line-height !default;
+
+$_font-open-sans: 'Open Sans', sans-serif !default;
+$_font-open-sans-cond: 'Open Sans Condensed', sans-serif !default;
+
+$_base-font-family: $_font-open-sans !default;
+$_base-font-family-condensed: $_font-open-sans-cond !default;
+$_base-font-family-headings: 'Proxima Nova Extra Condensed',
+  $_base-font-family-condensed !default;
+
+$_base-font-color: $_color-black !default;
+
+$_base-font-size-h1: 32px !default;
+$_base-font-size-h2: 30px !default;
+$_base-font-size-h3: 28px !default;
+$_base-font-size-h4: 26px !default;
+$_base-font-size-h5: 24px !default;
+$_base-font-size-h6: 18px !default;
+
+$_base-font-links-color: $_color-brand !default;
+$_base-font-links-color-hover: darken($_base-font-links-color, 5%) !default;
+$_base-font-links-color-focus: darken($_base-font-links-color, 10%) !default;
+$_base-font-links-text-decoration: none;
+
+// GFX
+$_transition-default: all ease 0.25s !default;
+
+// ==========================================================================
+// Layout
+// ==========================================================================
+
+$_layout-space: 10px !default;
+$_doc_line_base: 24px;
+
+// Breakpoints
+$_layout-breakpoints: (
+  smallest: 23.438em,
+  smaller: 25em,
+  small: 40em,
+  medium: 48em,
+  large: 64em,
+  largest: 78em
+) !default;
+
+/*
+23.438em = 375px
+25em = 400px
+40em = 640px
+48em = 768px
+64em = 1024px
+78em = 1250px
+*/
+
+// Columns
+$_layout-columns: (
+  one-quarter: 25%,
+  one-third: 33.3333%,
+  half: 50%,
+  three-quarter: 75%,
+  full: 100%,
+  two-third: 66.66667%
+) !default;
+
+// Grid
+$_layout-grid: (
+  width: 1170px,
+  columns: 12,
+  gutters: 25px,
+  breakpoints: $_layout-breakpoints
+) !default;
+
+// ==========================================================================
+// Bootstrap override
+// ==========================================================================
+
+$_grid-breakpoints: (
+  xs: 0,
+  sm: 576px,
+  md: 768px,
+  lg: 992px,
+  xl: 1200px,
+  xxl: 1400px
+) !default;
+
+$_container-max-widths: (
+  sm: 540px,
+  md: 720px,
+  lg: 960px,
+  xl: 1140px,
+  xxl: 1320px
+) !default;
+
+@import './function/strip-unit';
+@import './function/em';
+
+$grid-columns: map-get($_layout-grid, columns);
+$grid-width: map-get($_layout-grid, width);
+$grid-gutter-width: _em(map-get($_layout-grid, gutters));
+
+// Prefix for :root CSS variables
+$variable-prefix:             bs- !default; // Deprecated in v5.2.0 for the shorter `$prefix`
+$prefix:                      $variable-prefix !default;
+
+// Grid columns
+//
+// Set the number of columns and specify the width of the gutters.
+
+$grid-columns:                12 !default;
+$grid-gutter-width:           1.5rem !default;
+$grid-row-columns:            6 !default;
+
+// Container padding
+$container-padding-x: $grid-gutter-width !default;
+
+[data-theme='light'] {
+  --color-bg: #fcfaff;
+  --color-header-bg: #2a1f3f;
+  --color-header-text: #fcfaff;
+  --color-border: #54495f;
+  --color-link: #1600ed;
+  --color-text: #464064;
+  --color-text-heading: #1d1036;
+  --color-text-muted: #575280;
+}
+
+[data-theme='dark'] {
+  --color-bg: #121212;
+  --color-header-bg: #161617;
+  --color-navbar-bg: #18181B;
+  --color-sidebar-bg: #121212;
+  --color-modal-bg: #121212;
+  --color-input-bg: #121212;
+  //  --color-header-text: #e9e9f1;
+  //  --color-border: #54495f;
+  // --color-link: #617ff5;
+  --color-text: #FFFFFF;
+  --color-icon: #71717A;
+  --color-bg-form: #FFFFFF;
+  --color-text-heading: #71717A;
+  --color-error: #FF4D4F;
+}
+
+
