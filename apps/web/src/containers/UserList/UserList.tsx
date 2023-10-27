@@ -58,6 +58,8 @@ function UserList({
     newUser: false,
   });
 
+  const query = useQuery({ queryKey: ['todos'], queryFn: getTodos });
+
   /*
   const auth = useSelector((stateSelector) => stateSelector.auth);
   const dispatch = useDispatch();
