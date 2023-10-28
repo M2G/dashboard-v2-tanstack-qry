@@ -18,7 +18,7 @@ import Routes from './routes';
 import 'react-toastify/dist/ReactToastify.css';
 import './i18n';
 
-const queryClient = new QueryClient();
+export const queryClient = new QueryClient();
 
 function App(): JSX.Element {
   return (
