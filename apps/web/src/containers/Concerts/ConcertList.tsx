@@ -2,16 +2,16 @@ import { memo } from 'react';
 import { Card } from 'ui/components/layouts/Card/Card';
 
 type ConcertListProps = {
-  display_name: string;
   city: string;
+  display_name: string;
   uri: string;
 };
 
-const ConcertList = ({
+function ConcertList({
   city,
   display_name: displayName,
   uri,
-}: ConcertListProps) => {
+}: ConcertListProps) {
   return (
     <div className="o-col--one-quarter--large o-col--half--medium">
       <div className="o-cell--one">
@@ -53,6 +53,6 @@ const ConcertList = ({
       </div>
     </div>
   );
-};
+}
 
 export default memo(ConcertList);

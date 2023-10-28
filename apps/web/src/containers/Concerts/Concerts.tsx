@@ -16,7 +16,7 @@ import {
   useState,
 } from 'react';
 import { useForm } from 'react-hook-form';
-import { connect, useDispatch, useSelector } from 'react-redux';
+import useConcertList from '@/containers/Concerts/hooks';
 
 import ConcertList from './ConcertList';
 import chunk from './helpers';
@@ -32,6 +32,7 @@ function Concerts(): JSX.Element {
     page: 1,
     pageSize: 5,
   });
+
   const {
     control,
     formState: { errors },
@@ -41,29 +42,17 @@ function Concerts(): JSX.Element {
 
   const search = watch('search');
 
-  const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(
-      getConcertsAction({
-        page: 1,
-        pageSize: 5,
-      }),
-    );
-  }, [dispatch]);
+  const { data, refetch, isLoading } = useConcertList({
+    filters: search,
+    page: pagination.page,
+    pageSize: 5,
+  });
 
-  const concert = useSelector(
-    (stateSelector: { concert: IConcert }) => stateSelector.concert,
-  );
+  console.log('query query  query query', data);
 
   const debouncedSearch = useRef(
     debounce((filters: string): void => {
-      dispatch(
-        getConcertsAction({
-          filters,
-          page: pagination.page,
-          pageSize: 5,
-        }),
-      );
+      refetch();
     }, WAIT),
   ).current;
 
@@ -84,31 +73,37 @@ function Concerts(): JSX.Element {
       page: prevState.page + 1,
     }));
 
-    dispatch(
+    /* dispatch(
       getConcertsAction({
         page: pagination.page,
         pageSize: 5,
       }),
-    );
-  }, [dispatch, pagination.page]);
+    );*/
+  }, [
+    // dispatch,
+    pagination.page,
+  ]);
 
   // if (loading) return <TopLineLoading />;
 
-  // if (!concerts) return <NoData />;
+  const concert = useMemo(
+    () => data?.data?.data?.results,
+    [data?.data?.data?.results],
+  );
 
   useEffect((): void => {
     setState(
       (prevState: { concert: IConcert[] }) =>
         ({
           concert:
-            concert?.data?.results && prevState?.concert && !search
-              ? [...prevState?.concert, ...concert?.data?.results]
-              : concert?.data?.results && prevState?.concert && search
-              ? [...concert?.data?.results]
+            concert && prevState?.concert && !search
+              ? [...prevState?.concert, ...concert]
+              : concert && prevState?.concert && search
+              ? [...concert]
               : [],
         } as any),
     );
-  }, [concert?.data?.results, search]);
+  }, [concert, search]);
 
   const concertList: IConcert[] = useMemo(() => {
     const initialValue = {};
@@ -123,9 +118,12 @@ function Concerts(): JSX.Element {
     );
   }, [state?.concert]);
 
-  const concerts = useMemo(() => concert?.data, [concert?.data]);
+  const concerts = useMemo(
+    () => data?.data?.data?.results,
+    [data?.data?.data?.results],
+  );
 
-  if (concert?.loading) return <TopLineLoading />;
+  if (isLoading) return <TopLineLoading />;
 
   return (
     <div className="o-zone c-home">
@@ -145,12 +143,12 @@ function Concerts(): JSX.Element {
             />
           </form>
         </div>
-        <InfiniteScroll
-          hasMore={!!concerts?.pageInfo?.next}
-          loading={concert?.loading}
-          onLoadMore={loadMore}>
-          {concertList?.length > 0 &&
-            chunk(concertList, 4)?.map((nodes) => (
+        {concertList?.length > 0 ? (
+          <InfiniteScroll
+            hasMore={!!concerts?.pageInfo?.next}
+            loading={concert?.loading}
+            onLoadMore={loadMore}>
+            {chunk(concertList, 4)?.map((nodes) => (
               <div
                 className="o-grid__row"
                 key={`concert_${nodes?.[0]?.datetime}`}>
@@ -164,17 +162,13 @@ function Concerts(): JSX.Element {
                 ))}
               </div>
             ))}
-        </InfiniteScroll>
+          </InfiniteScroll>
+        ) : (
+          <NoData />
+        )}
       </div>
     </div>
   );
 }
 
-const mapStateToProps = (state: {
-  concert: { data: IConcert[]; loading: boolean };
-}) => ({
-  concert: state.concert.data,
-  loading: state.concert.loading,
-});
-
-export default connect(mapStateToProps)(Concerts);
+export default Concerts;
