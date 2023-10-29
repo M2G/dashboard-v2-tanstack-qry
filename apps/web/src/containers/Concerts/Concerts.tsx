@@ -2,7 +2,6 @@ import { Field } from 'ui';
 import InfiniteScroll from '@/components/Core/InfiniteScroll';
 import TopLineLoading from '@/components/Loading/TopLineLoading';
 import NoData from '@/components/NoData';
-import { getConcertsAction } from '@/store/concerts/actions';
 import { IConcert } from '@/store/concerts/types';
 
 import { debounce } from 'lodash';
@@ -42,13 +41,13 @@ function Concerts(): JSX.Element {
 
   const search = watch('search');
 
-  const { data, refetch, isLoading } = useConcertList({
+  const { data, isLoading, refetch } = useConcertList({
     filters: search,
     page: pagination.page,
     pageSize: 5,
   });
 
-  console.log('query query  query query', data);
+  console.log('pagination pagination  pagination pagination', pagination);
 
   const debouncedSearch = useRef(
     debounce((filters: string): void => {
@@ -72,24 +71,12 @@ function Concerts(): JSX.Element {
       ...prevState,
       page: prevState.page + 1,
     }));
+    refetch();
+  }, [refetch]);
 
-    /* dispatch(
-      getConcertsAction({
-        page: pagination.page,
-        pageSize: 5,
-      }),
-    );*/
-  }, [
-    // dispatch,
-    pagination.page,
-  ]);
+  const concerts = useMemo(() => data?.data?.data, [data?.data?.data]);
 
-  // if (loading) return <TopLineLoading />;
-
-  const concert = useMemo(
-    () => data?.data?.data?.results,
-    [data?.data?.data?.results],
-  );
+  const concert = useMemo(() => concerts?.results, [concerts?.results]);
 
   useEffect((): void => {
     setState(
@@ -117,11 +104,6 @@ function Concerts(): JSX.Element {
       }, initialValue),
     );
   }, [state?.concert]);
-
-  const concerts = useMemo(
-    () => data?.data?.data?.results,
-    [data?.data?.data?.results],
-  );
 
   if (isLoading) return <TopLineLoading />;
 

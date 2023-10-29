@@ -1,34 +1,29 @@
 import type { JSX } from 'react';
-import { useCallback, useContext, useEffect } from 'react';
+import { useCallback, useContext } from 'react';
 import SigninForm from '@/components/SigninForm';
 import { INITIAL_VALUES } from './constants';
 import { AuthContext } from '@/AuthContext';
-import { QueryClient, useMutation } from '@tanstack/react-query';
+import { UseMutationResult, useMutation } from '@tanstack/react-query';
+import { AxiosResponse } from 'axios';
 import { queryClient } from '@/App';
 import api from '@/api';
 
-interface ISignin {
-  loading: boolean;
-  signin: any;
-}
-
-function Signin({ loading, signin }: ISignin): JSX.Element {
+function Signin(): JSX.Element {
   const { activateAuth }: any = useContext(AuthContext);
-  const postTodo = (values: any) => api.post('/auth/authenticate', values);
+  const authenticate = (values: { email: string; password: string }) =>
+    api.post('/auth/authenticate', values);
 
-  const mutation = useMutation({
-    mutationFn: postTodo,
+  const mutation: UseMutationResult<AxiosResponse<any, any>> = useMutation({
+    mutationFn: authenticate,
     onSuccess: ({ data: { data } }) => {
       // Invalidate and refetch
-      queryClient.invalidateQueries({ queryKey: ['todos'] });
-      console.log('-----------------------', data);
+      queryClient.invalidateQueries({ queryKey: ['authenticate'] });
       data?.token && activateAuth(data.token);
     },
   });
 
   const onSubmit = useCallback(
-    (e: { email: string; password: string }) => {
-      console.log('mutate mutate mutate');
+    (e: { email: string; password: string }): void => {
       mutation.mutate({ ...e });
     },
     [mutation],

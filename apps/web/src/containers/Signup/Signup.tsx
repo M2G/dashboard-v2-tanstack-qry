@@ -1,15 +1,20 @@
 import type { JSX } from 'react';
 import { useCallback } from 'react';
-import { useDispatch } from 'react-redux';
-import { signupUserAction } from '@/store/signup/actions';
+import { useMutation } from '@tanstack/react-query';
 import SignupForm from '@/components/SignupForm';
 import { INITIAL_VALUES } from './constants';
+import { queryClient } from '@/App';
+import api from '@/api';
+import useSignup from './hooks';
 
 function Signup(): JSX.Element {
-  const dispatch = useDispatch();
+  const mutation = useSignup();
+
   const onSubmit = useCallback(
-      (e) => dispatch(signupUserAction(e)),
-      [dispatch],
+    (e: { email: string; password: string }) => {
+      mutation.mutate({ ...e });
+    },
+    [mutation],
   );
 
   return <SignupForm initialValues={INITIAL_VALUES} onSubmit={onSubmit} />;
