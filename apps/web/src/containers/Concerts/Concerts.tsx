@@ -6,14 +6,7 @@ import { IConcert } from '@/store/concerts/types';
 
 import { debounce } from 'lodash';
 
-import {
-  SetStateAction,
-  useCallback,
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
-} from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import useConcertList from '@/containers/Concerts/hooks';
 
