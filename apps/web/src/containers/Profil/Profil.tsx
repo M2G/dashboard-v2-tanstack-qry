@@ -1,11 +1,25 @@
 import { AuthContext } from '@/AuthContext';
 import ProfilForm from '@/components/ProfilForm';
-import { authGetUserProfilAction, authUpdateUserProfilAction } from '@/store/auth/actions';
 import { useCallback, useContext, useEffect } from 'react';
-import { connect, useDispatch, useSelector } from 'react-redux';
+import useProfil from './hooks';
 
 function Profil(): JSX.Element | null {
   const { userData }: { userData: { id: number } } = useContext(AuthContext);
+  const mutation = useProfil();
+
+  useEffect(() => {
+    // dispatch(authGetUserProfilAction({ id: userData?.id }));
+    mutation.mutate({ id: userData?.id });
+  }, [mutation, userData]);
+
+  const handleSubmit = useCallback(
+    (data) => {
+      mutation.mutate({ ...data, id: userData?.id });
+    },
+    [mutation, userData],
+  );
+
+  /*
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(authGetUserProfilAction({ id: userData?.id }));
@@ -21,15 +35,10 @@ function Profil(): JSX.Element | null {
     },
     [dispatch, userData?.id],
   );
+  */
 
-  return data && <ProfilForm initialValues={{ ...data }} onSubmit={handleSubmit} />;
+  return null;
+  //  data && <ProfilForm initialValues={{ ...data }} onSubmit={handleSubmit} />
 }
 
-const mapStateToProps = (state: { auth: { data: never; loading: boolean } }) => {
-  return {
-    auth: state.auth.data,
-    loading: state.auth.loading,
-  };
-};
-
-export default connect(mapStateToProps)(Profil);
+export default Profil;
