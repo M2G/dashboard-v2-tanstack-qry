@@ -5,13 +5,13 @@ import { INITIAL_VALUES } from './constants';
 import useSignup from './hooks';
 
 function Signup(): JSX.Element {
-  const mutation = useSignup();
+  const { mutate } = useSignup();
 
   const onSubmit = useCallback(
     (e: { email: string; password: string }) => {
-      mutation.mutate({ ...e });
+      mutate({ ...e });
     },
-    [mutation],
+    [mutate],
   );
 
   return <SignupForm initialValues={INITIAL_VALUES} onSubmit={onSubmit} />;

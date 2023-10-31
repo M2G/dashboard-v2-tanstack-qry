@@ -7,17 +7,17 @@ import useResetPassword from './hooks';
 
 function ResetPassword(): JSX.Element {
   const { search } = useLocation();
-  const mutation = useResetPassword();
+  const { mutate } = useResetPassword();
 
   const onSubmit = useCallback(
     (e) => {
       const searchParams = new URLSearchParams(search);
       if (searchParams.has('token')) {
         const token = searchParams.get('token');
-        mutation.mutate({ ...e, token });
+        mutate({ ...e, token });
       }
     },
-    [mutation, search],
+    [mutate, search],
   );
 
   return (

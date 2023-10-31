@@ -1,5 +1,4 @@
-/* eslint-disable */
-import api from 'api';
+import api from '@/api';
 
 function forgotPasswordService(params: any): Promise<any> {
   return api.post('/auth/forgot-password', params);

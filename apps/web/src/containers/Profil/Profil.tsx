@@ -5,18 +5,17 @@ import useProfil from './hooks';
 
 function Profil(): JSX.Element | null {
   const { userData }: { userData: { id: number } } = useContext(AuthContext);
-  const mutation = useProfil();
+  const { data, mutate } = useProfil();
 
   useEffect(() => {
-    // dispatch(authGetUserProfilAction({ id: userData?.id }));
-    mutation.mutate({ id: userData?.id });
-  }, [mutation, userData]);
+    mutate({ id: userData?.id });
+  }, [mutate, userData]);
 
   const handleSubmit = useCallback(
-    (data) => {
-      mutation.mutate({ ...data, id: userData?.id });
+    (d: unknown): void => {
+      mutate({ ...d, id: userData?.id });
     },
-    [mutation, userData],
+    [mutate, userData],
   );
 
   /*
@@ -37,8 +36,9 @@ function Profil(): JSX.Element | null {
   );
   */
 
-  return null;
-  //  data && <ProfilForm initialValues={{ ...data }} onSubmit={handleSubmit} />
+  return (
+    data && <ProfilForm initialValues={{ ...data }} onSubmit={handleSubmit} />
+  );
 }
 
 export default Profil;

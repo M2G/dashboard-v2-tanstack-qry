@@ -1,19 +1,21 @@
 import { AuthContext } from '@/AuthContext';
 import ChangePassordForm from '@/components/ChangePassordForm';
-import { authUpdatePasswordAction } from '@/store/auth/actions';
 import { useCallback, useContext } from 'react';
-import { useDispatch } from 'react-redux';
+import useChangePassword from './hooks';
 
 function ChangePassword(): JSX.Element {
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   const {
     userData: { id },
   } = useContext(AuthContext);
+  const { mutate } = useChangePassword();
+
   const handleSubmit = useCallback(
-    async (d) => {
-      dispatch(authUpdatePasswordAction({ id, ...d }));
+    async (d): Promise<void> => {
+      mutate({ id, ...d });
+      // dispatch(authUpdatePasswordAction({ id, ...d }));
     },
-    [dispatch, id],
+    [mutate, id],
   );
 
   return <ChangePassordForm initialValues={{}} onSubmit={handleSubmit} />;
