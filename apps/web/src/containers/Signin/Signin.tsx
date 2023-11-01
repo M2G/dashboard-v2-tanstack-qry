@@ -1,17 +1,20 @@
 import type { JSX } from 'react';
-import { useCallback } from 'react';
+import { useCallback, useContext } from 'react';
 import SigninForm from '@/components/SigninForm';
 import { INITIAL_VALUES } from './constants';
 import useSignin from './hooks';
+import { AuthContext } from '@/AuthContext';
 
 function Signin(): JSX.Element {
-  const { data, mutate } = useSignin();
+  const { activateAuth }: any = useContext(AuthContext);
+  const { mutateAsync } = useSignin();
 
   const onSubmit = useCallback(
-    (e: { email: string; password: string }): void => {
-      mutate({ ...e });
+    async (e: { email: string; password: string }): Promise<void> => {
+      const data = await mutateAsync({ ...e });
+      activateAuth(data?.data?.data?.token);
     },
-    [mutate],
+    [activateAuth, mutateAsync],
   );
 
   return <SigninForm initialValues={INITIAL_VALUES} onSubmit={onSubmit} />;
