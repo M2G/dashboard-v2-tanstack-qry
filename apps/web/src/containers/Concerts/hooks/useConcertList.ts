@@ -6,6 +6,7 @@ interface IUseConcertList {
   page: number;
   pageSize: number;
 }
+
 function useConcertList({ filters, page, pageSize }: IUseConcertList) {
   return useQuery({
     cacheTime: 0,

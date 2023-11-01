@@ -24,6 +24,7 @@ import { signupUserAction } from '@/store/signup/actions';
 import { AuthContext } from '@/AuthContext';
 import AddUser from './Action/AddUser';
 import userListItem from './UserListItem';
+import useUserList from '@/containers/Users/hooks';
 
 type UserListProps = {
   canAdd: boolean;
@@ -58,7 +59,13 @@ function UserList({
     newUser: false,
   });
 
-  const query = useQuery({ queryKey: ['todos'], queryFn: getTodos });
+  const query = useUserList({
+    filters: term,
+    page: pagination.page,
+    pageSize: pagination.pageSize,
+  });
+
+  console.log('query query query query query', query);
 
   /*
   const auth = useSelector((stateSelector) => stateSelector.auth);
