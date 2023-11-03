@@ -1,12 +1,6 @@
 import type { JSX } from 'react';
 import * as Sentry from '@sentry/react';
-import {
-  useQuery,
-  useMutation,
-  useQueryClient,
-  QueryClient,
-  QueryClientProvider,
-} from '@tanstack/react-query';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ErrorBoundary } from 'react-error-boundary';
 import { ToastContainer } from 'react-toastify';
 import { BrowserRouter } from 'react-router-dom';

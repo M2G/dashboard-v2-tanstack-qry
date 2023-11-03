@@ -1,8 +1,6 @@
 import type { JSX, SetStateAction } from 'react';
 import { useCallback, useContext, useEffect, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useDispatch, useSelector } from 'react-redux';
-import { useQuery } from '@tanstack/react-query';
 
 import ModalWrapper from '@/components/Core/Modal/ModalWrapper';
 import SidebarWrapper from '@/components/Core/Sidebar/SidebarWrapper';
@@ -24,7 +22,11 @@ import { signupUserAction } from '@/store/signup/actions';
 import { AuthContext } from '@/AuthContext';
 import AddUser from './Action/AddUser';
 import userListItem from './UserListItem';
-import useUserList from '@/containers/Users/hooks';
+import {
+  useDeleteUser,
+  useEditUser,
+  useUserList,
+} from '@/containers/Users/hooks';
 
 type UserListProps = {
   canAdd: boolean;
@@ -59,13 +61,16 @@ function UserList({
     newUser: false,
   });
 
-  const query = useUserList({
+  const { data, isError, isLoading, refetch } = useUserList({
     filters: term,
     page: pagination.page,
     pageSize: pagination.pageSize,
   });
 
-  console.log('query query query query query', query);
+  const { mutateAsync: mutateAsyncDelete } = useDeleteUser();
+  const { mutateAsync: mutateAsyncEdit } = useEditUser();
+
+  console.log('query query query query query', data);
 
   /*
   const auth = useSelector((stateSelector) => stateSelector.auth);
@@ -82,13 +87,6 @@ function UserList({
     dispatch(authUpdateUserProfilAction(params));
   const signupAction = (params) => dispatch(signupUserAction(params));
 */
-  useEffect(() => {
-    /*authGetUsersProfil({
-      filters: term,
-      page: pagination.page,
-      pageSize: pagination.pageSize,
-    });*/
-  }, [term, pagination.page, pagination.pageSize]);
 
   const handleAction = useCallback(
     ({
@@ -144,6 +142,8 @@ function UserList({
         pageSize,
       }));
 
+      refetch();
+
       /*authGetUsersProfil({
         filters: term,
         page: pagination.page,
@@ -161,6 +161,8 @@ function UserList({
   const searchTerms = useCallback(
     (terms: string): void => {
       setTerm(terms);
+      refetch();
+
       /*authGetUsersProfil({
         filters: terms,
         page: pagination.page,
@@ -181,18 +183,15 @@ function UserList({
         page,
       }));
 
+      refetch();
+
       /*authGetUsersProfil({
         filters: term,
         page: page || pagination.page,
         pageSize: pagination.pageSize,
       });*/
     },
-    [
-      //authGetUsersProfil,
-      term,
-      pagination.page,
-      pagination.pageSize,
-    ],
+    [refetch],
   );
 
   const onNewUser = useCallback(
@@ -224,6 +223,7 @@ function UserList({
 
   const onDeleteUser = useCallback(
     (user) => {
+      refetch();
       /*deleteUserAction({ id: user.id });
       authGetUsersProfil({
         filters: term,
@@ -233,6 +233,7 @@ function UserList({
       handleAction({ deletingUser: false, editingUser: false, newUser: false });
     },
     [
+      refetch,
       //authGetUsersProfil,
       //deleteUserAction,
       handleAction,
@@ -242,16 +243,7 @@ function UserList({
     ],
   );
 
-  const auth = {
-    loading: false,
-    data: [
-      {
-        results: [],
-        pageInfo: {},
-      },
-    ],
-  };
-  const users = auth?.data || [];
+  const users = data?.data?.data || [];
   const results = users?.results || [];
   const pageInfo = users?.pageInfo || {};
 
@@ -292,7 +284,7 @@ function UserList({
     [t],
   );
 
-  if (!users?.length && auth.loading) return <TopLineLoading />;
+  if (!users?.length && isLoading) return <TopLineLoading />;
 
   return (
     <div className="c-user-list">

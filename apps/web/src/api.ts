@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { toast } from 'react-toastify';
 
+import { clearAuthStorage, clearUserStorage } from '@/services';
 import Config from './constants';
 
 const api = axios.create({
@@ -49,6 +50,13 @@ const myInterceptor = api.interceptors.response.use(
      * https://stackoverflow.com/questions/51646853/automating-access-token-refreshing-via-interceptors-in-axios
      */
     toast.error(`${error?.message} : ${error?.response.data.error}`);
+
+    // only for react-query
+    if (error?.response?.status === 401) {
+      clearUserStorage();
+      clearAuthStorage();
+      window.location.href = '/signin';
+    }
 
     api.interceptors.response.eject(myInterceptor);
     (import.meta as any).env.MODE === 'development'

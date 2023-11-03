@@ -8,7 +8,7 @@ function Signup(): JSX.Element {
   const { mutate } = useSignup();
 
   const onSubmit = useCallback(
-    (e: { email: string; password: string }) => {
+    (e: { email: string; password: string }): void => {
       mutate({ ...e });
     },
     [mutate],
