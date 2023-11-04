@@ -64,7 +64,7 @@ function UserEditForm({ initialValues, onSubmit }: IForm) {
         />
         <Button
           className="_:bg-white _:font-normal _:text-black w-full"
-          disabled={isValid}
+          disabled={!isValid}
           type="submit"
           variant="primary">
           {t('form.save')}

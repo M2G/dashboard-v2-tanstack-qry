@@ -14,7 +14,9 @@ function userProfilService(id: string): Promise<any> {
 }
 
 function createUserProfilService(params: any): Promise<any> {
-  return api.post(`/users`, params);
+  //TODO
+  //return api.post(`/users`, params);
+  return api.post('/auth/authenticate', params);
 }
 
 function updateUserProfilService({ id, ...params }: any): Promise<any> {

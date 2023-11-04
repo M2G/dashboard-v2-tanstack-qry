@@ -1,7 +1,7 @@
-/*eslint-disable*/
-import api from 'api';
+import api from '@/api';
 
-const signinService = async (params: any) =>
-  await api.post('/auth/authenticate', params);
+function signinService(params) {
+  return api.post('/auth/authenticate', params);
+}
 
 export default signinService;

@@ -9,7 +9,13 @@ import { useForm } from 'react-hook-form';
 
 import { Button, Field } from 'ui';
 
-import { formSchema, INITIAL_VALUES, INPUT_NAME, LABEL_EMAIL, LABEL_PASSWORD } from './constants';
+import {
+  formSchema,
+  INITIAL_VALUES,
+  INPUT_NAME,
+  LABEL_EMAIL,
+  LABEL_PASSWORD,
+} from './constants';
 
 type FormSchemaType = z.infer<typeof formSchema>;
 
@@ -33,6 +39,8 @@ function UserNewForm({ onSubmit }: IForm): JSX.Element {
     resolver: zodResolver(formSchema),
   });
 
+  console.log('isValid isValid isValid', isValid);
+
   return (
     <div className="pt-[50px]">
       <form className="p-2" onSubmit={handleSubmit(onSubmit)}>
@@ -54,7 +62,7 @@ function UserNewForm({ onSubmit }: IForm): JSX.Element {
         />
         <Button
           className="_:bg-white _:font-normal _:text-black w-full"
-          disabled={isValid}
+          disabled={!isValid}
           type="submit"
           variant="primary">
           {t('form.save')}

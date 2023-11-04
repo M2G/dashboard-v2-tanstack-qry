@@ -23,6 +23,7 @@ import { AuthContext } from '@/AuthContext';
 import AddUser from './Action/AddUser';
 import userListItem from './UserListItem';
 import {
+  useCreateUser,
   useDeleteUser,
   useEditUser,
   useUserList,
@@ -69,6 +70,7 @@ function UserList({
 
   const { mutateAsync: mutateAsyncDelete } = useDeleteUser();
   const { mutateAsync: mutateAsyncEdit } = useEditUser();
+  const { mutate: mutateCreate } = useCreateUser();
 
   console.log('query query query query query', data);
 
@@ -202,7 +204,9 @@ function UserList({
         newUser?: boolean | any;
       }>,
     ) => {
-      setUser(user);
+      mutateCreate({ ...user });
+      refetch();
+      // setUser(user);
       /*signupAction(user);
       authGetUsersProfil({
         filters: term,
@@ -211,14 +215,7 @@ function UserList({
       });*/
       handleAction({ deletingUser: false, editingUser: false, newUser: false });
     },
-    [
-      //authGetUsersProfil,
-      handleAction,
-      pagination.page,
-      pagination.pageSize,
-      //signupAction,
-      term,
-    ],
+    [refetch, mutateCreate, handleAction],
   );
 
   const onDeleteUser = useCallback(
