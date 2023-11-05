@@ -13,10 +13,17 @@ export default defineConfig(() => {
       'process.env': {},
       'import.meta.env.PACKAGE_VERSION': JSON.stringify(packageJson.version),
     },
-    plugins: [react(), svgr()],
+    plugins: [
+      react({
+        jsxImportSource: '@welldone-software/why-did-you-render', // <-----
+      }),
+      svgr(),
+    ],
     publicDir: 'public',
     resolve: {
       alias: {
+        // Needed for `useSelector` tracking in wdyr.tsx: https://github.com/welldone-software/why-did-you-render/issues/85
+        'react-redux': 'react-redux/dist/react-redux.js',
         '@types': path.resolve(__dirname, './src/@types'),
         '@': path.resolve(__dirname, './src'),
         api: path.resolve(__dirname, './src/api/'),

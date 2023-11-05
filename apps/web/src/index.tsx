@@ -1,3 +1,4 @@
+import './wdyr';
 import React from 'react';
 import SENTRY_CONFIG from '@/sentry/config';
 import { init as initSentry } from '@sentry/react';
@@ -6,7 +7,6 @@ import { createRoot } from 'react-dom/client';
 import { Provider } from 'react-redux';
 import App from './App';
 import configureStore from './configureStore';
-import './wdyr.js';
 import './index.scss';
 
 initSentry(SENTRY_CONFIG);
@@ -20,9 +20,11 @@ function render(Component): void {
   const root = createRoot(MOUNT_NODE);
   if (root) {
     return root.render(
-      <Provider store={store}>
-        <Component history={history} />
-      </Provider>,
+      <React.StrictMode>
+        <Provider store={store}>
+          <Component history={history} />
+        </Provider>
+      </React.StrictMode>,
     );
   }
 }
