@@ -205,7 +205,7 @@ function UserList({
       }>,
     ) => {
       mutateCreate({ ...user });
-      refetch();
+      // refetch();
       // setUser(user);
       /*signupAction(user);
       authGetUsersProfil({
@@ -215,7 +215,7 @@ function UserList({
       });*/
       handleAction({ deletingUser: false, editingUser: false, newUser: false });
     },
-    [refetch, mutateCreate, handleAction],
+    [mutateCreate, handleAction],
   );
 
   const onDeleteUser = useCallback(

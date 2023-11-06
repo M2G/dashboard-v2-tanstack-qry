@@ -23,7 +23,8 @@ export default defineConfig(() => {
     resolve: {
       alias: {
         // Needed for `useSelector` tracking in wdyr.tsx: https://github.com/welldone-software/why-did-you-render/issues/85
-        'react-redux': 'react-redux/dist/react-redux.js',
+        //@see only with react-redux
+        //'react-redux': 'react-redux/dist/react-redux.js',
         '@types': path.resolve(__dirname, './src/@types'),
         '@': path.resolve(__dirname, './src'),
         api: path.resolve(__dirname, './src/api/'),
