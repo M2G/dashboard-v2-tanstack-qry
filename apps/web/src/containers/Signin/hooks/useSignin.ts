@@ -6,7 +6,7 @@ import { queryClient } from '@/App';
 function useSignin(): UseMutationResult<AxiosResponse<any, any>> {
   return useMutation({
     mutationFn: signinUserService,
-    onSuccess: (): void => {
+    onSettled: (): void => {
       // Invalidate and refetch
       queryClient.invalidateQueries({ queryKey: ['authenticate'] });
     },
