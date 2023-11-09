@@ -68,8 +68,8 @@ function UserList({
     pageSize: pagination.pageSize,
   });
 
-  const { mutateAsync: mutateAsyncDelete } = useDeleteUser();
-  const { mutateAsync: mutateAsyncEdit } = useEditUser();
+  const { mutate: mutatecDelete } = useDeleteUser();
+  const { mutate: mutateEdit } = useEditUser();
   const { mutate: mutateCreate } = useCreateUser();
 
   console.log('query query query query query', data);
@@ -220,7 +220,10 @@ function UserList({
 
   const onDeleteUser = useCallback(
     (user) => {
-      refetch();
+      mutatecDelete({ id: user.id });
+
+      console.log('onDeleteUser onDeleteUser onDeleteUser', user.id);
+      // refetch();
       /*deleteUserAction({ id: user.id });
       authGetUsersProfil({
         filters: term,
@@ -230,7 +233,6 @@ function UserList({
       handleAction({ deletingUser: false, editingUser: false, newUser: false });
     },
     [
-      refetch,
       //authGetUsersProfil,
       //deleteUserAction,
       handleAction,
