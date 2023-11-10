@@ -1,5 +1,12 @@
 import type { JSX, SetStateAction } from 'react';
-import { useCallback, useContext, useEffect, useMemo, useState } from 'react';
+import {
+  useCallback,
+  useContext,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from 'react';
 import { useTranslation } from 'react-i18next';
 
 import ModalWrapper from '@/components/Core/Modal/ModalWrapper';
@@ -162,20 +169,11 @@ function UserList({
 
   const searchTerms = useCallback(
     (terms: string): void => {
+      console.log('searchTerms searchTerms searchTerms', terms);
       setTerm(terms);
       refetch();
-
-      /*authGetUsersProfil({
-        filters: terms,
-        page: pagination.page,
-        pageSize: pagination.pageSize,
-      });*/
     },
-    [
-      //authGetUsersProfil,
-      pagination.page,
-      pagination.pageSize,
-    ],
+    [refetch],
   );
 
   const onChangePage = useCallback(
@@ -205,41 +203,17 @@ function UserList({
       }>,
     ) => {
       mutateCreate({ ...user });
-      // refetch();
-      // setUser(user);
-      /*signupAction(user);
-      authGetUsersProfil({
-        filters: term,
-        page: pagination.page,
-        pageSize: pagination.pageSize,
-      });*/
       handleAction({ deletingUser: false, editingUser: false, newUser: false });
     },
     [mutateCreate, handleAction],
   );
 
   const onDeleteUser = useCallback(
-    (user) => {
+    (user: { id: { id: string } }): void => {
       mutatecDelete({ id: user.id });
-
-      console.log('onDeleteUser onDeleteUser onDeleteUser', user.id);
-      // refetch();
-      /*deleteUserAction({ id: user.id });
-      authGetUsersProfil({
-        filters: term,
-        page: pagination.page,
-        pageSize: pagination.pageSize,
-      });*/
       handleAction({ deletingUser: false, editingUser: false, newUser: false });
     },
-    [
-      //authGetUsersProfil,
-      //deleteUserAction,
-      handleAction,
-      pagination.page,
-      pagination.pageSize,
-      term,
-    ],
+    [handleAction, mutatecDelete],
   );
 
   const users = data?.data?.data || [];

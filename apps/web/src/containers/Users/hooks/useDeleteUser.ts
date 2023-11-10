@@ -20,16 +20,6 @@ function useDeleteUser(): UseMutationResult<AxiosResponse<any, any>> {
 
       // Optimistically update to the new value
       queryClient.setQueryData(['userList'], (old: any) => {
-        console.log('old old old', old);
-        //return [...old, newTodo];
-
-        console.log(
-          ':::::::::::::::::::::::::',
-          old?.data?.data?.results.filter(({ id }) => {
-            return id !== newTodo.id;
-          }),
-        );
-
         //TODO: add optimistic update
         return {
           data: {
@@ -42,15 +32,13 @@ function useDeleteUser(): UseMutationResult<AxiosResponse<any, any>> {
                 page: 1,
                 prev: old?.data?.data?.pageInfo?.prev,
               },
-              results: old?.data?.data?.results.filter(({ id }) => {
-                return id !== newTodo.id;
-              }),
+              results: old?.data?.data?.results.filter(
+                ({ id }) => id !== newTodo.id,
+              ),
             },
           },
         };
       });
-
-      console.log('previousTodos previousTodos previousTodos', previousTodos);
 
       // Return a context object with the snapshotted value
       return { previousTodos };

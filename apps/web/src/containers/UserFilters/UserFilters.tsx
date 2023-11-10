@@ -11,9 +11,13 @@ interface UserFiltersProps {
   onSearchTerm: (searchTerm: string) => void;
 }
 
-function UserFilters({ currentTerm, onSearchTerm }: UserFiltersProps): JSX.Element {
+function UserFilters({
+  currentTerm,
+  onSearchTerm,
+}: UserFiltersProps): JSX.Element {
   const { t } = useTranslation();
   const [term, setTerm] = useState(currentTerm);
+
   const debouncedSearch = useRef(
     debounce((criteria: string): void => {
       onSearchTerm(criteria);
@@ -27,7 +31,11 @@ function UserFilters({ currentTerm, onSearchTerm }: UserFiltersProps): JSX.Eleme
     [debouncedSearch],
   );
 
-  function handleChange({ target: { value = '' } }: { target: { value: string } }): void {
+  function handleChange({
+    target: { value = '' },
+  }: {
+    target: { value: string };
+  }): void {
     debouncedSearch(value);
     setTerm(value);
   }
@@ -39,8 +47,7 @@ function UserFilters({ currentTerm, onSearchTerm }: UserFiltersProps): JSX.Eleme
       name={INPUT_NAME.SEARCH}
       onChange={handleChange}
       placeholder={PLACEHOLDER_SEARCH}
-      type="search"
-      value={term}
+      type="text"
     />
   );
 }

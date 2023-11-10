@@ -32,7 +32,7 @@ function getUsersService({ filters, page, pageSize }): Promise<any> {
   );
 }
 
-function deleteUsersService(id: string): Promise<any> {
+function deleteUsersService({ id }: { id: string }): Promise<any> {
   return api.delete(`/auth/users/${id}`);
 }
 
