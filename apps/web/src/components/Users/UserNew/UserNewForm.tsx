@@ -39,8 +39,6 @@ function UserNewForm({ onSubmit }: IForm): JSX.Element {
     resolver: zodResolver(formSchema),
   });
 
-  console.log('isValid isValid isValid', isValid);
-
   return (
     <div className="pt-[50px]">
       <form className="p-2" onSubmit={handleSubmit(onSubmit)}>

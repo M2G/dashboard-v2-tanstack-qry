@@ -118,30 +118,10 @@ function UserList({
 
   const onEditUser = useCallback(
     (user: any): void => {
-      /* editUserAction({
-        ...user,
-        id: state.editingUser.id,
-      });
-      authGetUsersProfil({
-        filters: term,
-        page: pagination.page,
-        pageSize: pagination.pageSize,
-      });
-      handleAction({
-        deletingUser: false,
-        editingUser: false,
-        newUser: false,
-      });*/
+      mutateEdit({ id: state.editingUser.id, ...user });
+      handleAction({ deletingUser: false, editingUser: false, newUser: false });
     },
-    [
-      // authGetUsersProfil,
-      // editUserAction,
-      handleAction,
-      pagination.page,
-      pagination.pageSize,
-      state.editingUser.id,
-      term,
-    ],
+    [handleAction, mutateEdit, state.editingUser],
   );
 
   const onChangePageSize = useCallback(
@@ -152,19 +132,8 @@ function UserList({
       }));
 
       refetch();
-
-      /*authGetUsersProfil({
-        filters: term,
-        page: pagination.page,
-        pageSize: pageSize || pagination.pageSize,
-      });*/
     },
-    [
-      //authGetUsersProfil,
-      pagination.page,
-      pagination.pageSize,
-      term,
-    ],
+    [refetch],
   );
 
   const searchTerms = useCallback(
@@ -184,12 +153,6 @@ function UserList({
       }));
 
       refetch();
-
-      /*authGetUsersProfil({
-        filters: term,
-        page: page || pagination.page,
-        pageSize: pagination.pageSize,
-      });*/
     },
     [refetch],
   );
@@ -203,7 +166,7 @@ function UserList({
       }>,
     ) => {
       mutateCreate({ ...user });
-      handleAction({ deletingUser: false, editingUser: false, newUser: false });
+      //handleAction({ deletingUser: false, editingUser: false, newUser: false });
     },
     [mutateCreate, handleAction],
   );
@@ -211,7 +174,7 @@ function UserList({
   const onDeleteUser = useCallback(
     (user: { id: { id: string } }): void => {
       mutatecDelete({ id: user.id });
-      handleAction({ deletingUser: false, editingUser: false, newUser: false });
+      //handleAction({ deletingUser: false, editingUser: false, newUser: false });
     },
     [handleAction, mutatecDelete],
   );

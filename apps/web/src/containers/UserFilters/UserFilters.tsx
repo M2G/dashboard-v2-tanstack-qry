@@ -48,6 +48,7 @@ function UserFilters({
       onChange={handleChange}
       placeholder={PLACEHOLDER_SEARCH}
       type="text"
+      value={term}
     />
   );
 }
