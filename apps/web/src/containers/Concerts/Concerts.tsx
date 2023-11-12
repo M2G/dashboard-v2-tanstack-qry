@@ -34,7 +34,7 @@ function Concerts(): JSX.Element {
   });
 
   const debouncedSearch = useRef(
-    debounce((filters: string): void => {
+    debounce((_: string): void => {
       refetch();
     }, WAIT),
   ).current;
