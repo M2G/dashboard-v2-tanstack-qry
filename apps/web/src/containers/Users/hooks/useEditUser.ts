@@ -26,33 +26,28 @@ function useEditUser(): UseMutationResult<AxiosResponse<any, any>> {
             date: old?.data?.date,
             success: true,
             data: {
-              pageInfo: {
-                count: old?.data?.data?.pageInfo?.count,
-                next: old?.data?.data?.pageInfo?.next + 1,
-                page: 1,
-                prev: old?.data?.data?.pageInfo?.prev,
-              },
+              pageInfo: old?.data?.data?.pageInfo,
               results: [
-                ...old?.data?.data?.results,
+                ...old?.data?.data?.results.filter(
+                  ({ id }) => id !== newTodo.id,
+                ),
                 {
                   created_at: new Date().toISOString(),
                   deleted_at: 0,
-                  email: newTodo.email,
-                  id: 15,
+                  email: newTodo?.email,
+                  id: newTodo?.id,
                   last_connected_at: null,
                   modified_at: new Date().toISOString(),
-                  password: newTodo.password,
+                  password: newTodo?.password,
                   reset_password_expires: null,
                   reset_password_token: null,
-                  username: null,
+                  username: newTodo?.username,
                 },
               ],
             },
           },
         };
       });
-
-      console.log('previousTodos previousTodos previousTodos', previousTodos);
 
       // Return a context object with the snapshotted value
       return { previousTodos };

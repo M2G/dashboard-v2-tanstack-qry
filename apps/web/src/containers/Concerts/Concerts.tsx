@@ -25,22 +25,13 @@ function Concerts(): JSX.Element {
     pageSize: 5,
   });
 
-  const {
-    control,
-    formState: { errors },
-    register,
-    watch,
-  } = useForm();
-
-  const search = watch('search');
+  const [term, setTerm] = useState('');
 
   const { data, isLoading, refetch } = useConcertList({
-    filters: search,
+    filters: term,
     page: pagination.page,
     pageSize: 5,
   });
-
-  console.log('pagination pagination  pagination pagination', pagination);
 
   const debouncedSearch = useRef(
     debounce((filters: string): void => {
@@ -48,16 +39,21 @@ function Concerts(): JSX.Element {
     }, WAIT),
   ).current;
 
-  function handleChange(value: string): void {
+  function handleChange({
+    target: { value = '' },
+  }: {
+    target: { value: string };
+  }): void {
     debouncedSearch(value);
+    setTerm(value);
   }
 
-  useEffect((): (() => void) => {
-    handleChange(search);
-    return () => {
+  useEffect(
+    () => (): void => {
       debouncedSearch.cancel();
-    };
-  }, [search, debouncedSearch]);
+    },
+    [debouncedSearch],
+  );
 
   const loadMore = useCallback((): void => {
     setPagination((prevState) => ({
@@ -76,14 +72,14 @@ function Concerts(): JSX.Element {
       (prevState: { concert: IConcert[] }) =>
         ({
           concert:
-            concert && prevState?.concert && !search
+            concert && prevState?.concert && !term
               ? [...prevState?.concert, ...concert]
-              : concert && prevState?.concert && search
+              : concert && prevState?.concert && term
               ? [...concert]
               : [],
         } as any),
     );
-  }, [concert, search]);
+  }, [concert, term]);
 
   const concertList: IConcert[] = useMemo(() => {
     const initialValue = {};
@@ -104,19 +100,15 @@ function Concerts(): JSX.Element {
     <div className="o-zone c-home">
       <div className="o-grid">
         <div className="flex items-center">
-          <form className="relative w-full">
-            <Field
-              className="focus:shadow-none;
-              mb-2.5 block w-full rounded-sm
-              border-[hsla(0deg,0%,100%,0.1)] border-gray-300 bg-gray-50 bg-transparent text-sm text-[color:var(--color-text-heading)] text-gray-900 focus:border-blue-500 focus:ring-blue-500  dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
-              id="simple-search"
-              label="Search branch name..."
-              name="search"
-              required
-              type="text"
-              {...{ control, errors, register }}
-            />
-          </form>
+          <input
+            className="placeholder:text-grey-dark -ml-px mb-px w-full rounded-none border-b border-[hsla(0deg,0%,100%,0.1)] bg-transparent p-2 text-[rgb(113_113_122/var(--tw-text-opacity))] focus:shadow-none focus:outline-none"
+            id="simple-search"
+            name="search"
+            onChange={handleChange}
+            placeholder="Search branch name..."
+            required
+            type="text"
+          />
         </div>
         {concertList?.length > 0 ? (
           <InfiniteScroll

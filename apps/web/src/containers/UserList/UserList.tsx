@@ -79,24 +79,6 @@ function UserList({
   const { mutate: mutateEdit } = useEditUser();
   const { mutate: mutateCreate } = useCreateUser();
 
-  console.log('query query query query query', data);
-
-  /*
-  const auth = useSelector((stateSelector) => stateSelector.auth);
-  const dispatch = useDispatch();
-
-  const authGetUsersProfil = (params: {
-    filters: string;
-    page: number;
-    pageSize: number;
-  }) => dispatch(authGetUsersProfilAction(params));
-  const deleteUserAction = (id: { id: number }) =>
-    dispatch(authDeleteUserProfilAction(id));
-  const editUserAction = (params) =>
-    dispatch(authUpdateUserProfilAction(params));
-  const signupAction = (params) => dispatch(signupUserAction(params));
-*/
-
   const handleAction = useCallback(
     ({
       deletingUser,
@@ -138,7 +120,6 @@ function UserList({
 
   const searchTerms = useCallback(
     (terms: string): void => {
-      console.log('searchTerms searchTerms searchTerms', terms);
       setTerm(terms);
       refetch();
     },
@@ -166,7 +147,7 @@ function UserList({
       }>,
     ) => {
       mutateCreate({ ...user });
-      //handleAction({ deletingUser: false, editingUser: false, newUser: false });
+      handleAction({ deletingUser: false, editingUser: false, newUser: false });
     },
     [mutateCreate, handleAction],
   );
@@ -174,7 +155,7 @@ function UserList({
   const onDeleteUser = useCallback(
     (user: { id: { id: string } }): void => {
       mutatecDelete({ id: user.id });
-      //handleAction({ deletingUser: false, editingUser: false, newUser: false });
+      handleAction({ deletingUser: false, editingUser: false, newUser: false });
     },
     [handleAction, mutatecDelete],
   );
