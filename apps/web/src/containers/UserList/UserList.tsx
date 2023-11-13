@@ -19,12 +19,6 @@ import UserEdit from '@/components/Users/UserEdit';
 import UserNew from '@/components/Users/UserNew';
 import UserFilters from '@/containers/UserFilters';
 import List from '@/containers/UserList/ListLegacy';
-import {
-  authDeleteUserProfilAction,
-  authGetUsersProfilAction,
-  authUpdateUserProfilAction,
-} from '@/store/auth/actions';
-import { signupUserAction } from '@/store/signup/actions';
 
 import { AuthContext } from '@/AuthContext';
 import AddUser from './Action/AddUser';

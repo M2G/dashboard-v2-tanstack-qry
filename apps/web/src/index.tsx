@@ -4,15 +4,12 @@ import SENTRY_CONFIG from '@/sentry/config';
 import { init as initSentry } from '@sentry/react';
 import { createBrowserHistory } from 'history';
 import { createRoot } from 'react-dom/client';
-import { Provider } from 'react-redux';
 import App from './App';
-import configureStore from './configureStore';
 import './index.scss';
 
 initSentry(SENTRY_CONFIG);
 
 export const history = createBrowserHistory();
-export const store = configureStore({} as any);
 
 function render(Component): void {
   const MOUNT_NODE: any =
@@ -21,9 +18,7 @@ function render(Component): void {
   if (root) {
     return root.render(
       <React.StrictMode>
-        <Provider store={store}>
-          <Component history={history} />
-        </Provider>
+        <Component history={history} />
       </React.StrictMode>,
     );
   }
