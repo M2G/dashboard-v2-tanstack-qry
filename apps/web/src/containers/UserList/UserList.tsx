@@ -20,7 +20,6 @@ import UserNew from '@/components/Users/UserNew';
 import UserFilters from '@/containers/UserFilters';
 import List from '@/containers/UserList/ListLegacy';
 
-import { AuthContext } from '@/AuthContext';
 import AddUser from './Action/AddUser';
 import userListItem from './UserListItem';
 import {
@@ -43,7 +42,6 @@ function UserList({
   canEdit = false,
   id,
 }: UserListProps): JSX.Element | null {
-  const { activateAuth }: any = useContext(AuthContext);
   const { t } = useTranslation();
   const [pagination, setPagination] = useState<{
     page: number;
