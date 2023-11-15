@@ -14,7 +14,7 @@ function userProfilService(id: string): Promise<any> {
 
 function createUserProfilService(params: any): Promise<any> {
   // return api.post(`/users`, params);
-  //TODO
+  // TODO
   return api.post('/auth/register', params);
 }
 
@@ -37,11 +37,11 @@ function deleteUsersService({ id }: { id: string }): Promise<any> {
 }
 
 export {
-  forgotPasswordService,
-  recoverPasswordService,
-  getUsersService,
   createUserProfilService,
-  userProfilService,
-  updateUserProfilService,
   deleteUsersService,
+  forgotPasswordService,
+  getUsersService,
+  recoverPasswordService,
+  updateUserProfilService,
+  userProfilService,
 };
