@@ -6,7 +6,7 @@ import useSignin from './hooks';
 import { AuthContext } from '@/AuthContext';
 
 function Signin(): JSX.Element {
-  const { activateAuth }: any = useContext(AuthContext);
+  const { activateAuth } = useContext(AuthContext);
   const { mutateAsync } = useSignin();
 
   const onSubmit = useCallback(

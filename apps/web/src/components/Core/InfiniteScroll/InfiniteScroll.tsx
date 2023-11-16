@@ -34,8 +34,6 @@ function InfiniteScroll({
 
       const { clientHeight, scrollHeight, scrollTop } = ref.current;
 
-      console.log('ref.current.scrollTop', scrollTop);
-      console.log('ref.current.clientHeight', clientHeight);
       if (scrollTop + clientHeight === scrollHeight) {
         // Fix for the issue where the scroll event is triggered multiple times
         if (hasMore && isMounted.current) {

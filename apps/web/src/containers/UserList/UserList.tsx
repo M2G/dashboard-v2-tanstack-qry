@@ -193,6 +193,8 @@ function UserList({
     [t],
   );
 
+  if (isError) return <div>{isError}</div>;
+
   if (!users?.length && isLoading) return <TopLineLoading />;
 
   return (
