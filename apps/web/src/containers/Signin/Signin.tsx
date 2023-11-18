@@ -1,9 +1,9 @@
 import type { JSX } from 'react';
 import { useCallback, useContext } from 'react';
+import { AuthContext } from '@/AuthContext';
 import SigninForm from '@/components/SigninForm';
 import { INITIAL_VALUES } from './constants';
 import useSignin from './hooks';
-import { AuthContext } from '@/AuthContext';
 
 function Signin(): JSX.Element {
   const { activateAuth } = useContext(AuthContext);
