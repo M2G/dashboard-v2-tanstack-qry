@@ -11,7 +11,7 @@ initSentry(SENTRY_CONFIG);
 
 export const history = createBrowserHistory();
 
-function render(Component): void {
+function render(Component) {
   const MOUNT_NODE: HTMLElement =
     document.getElementById('root') || document.createElement('div');
   const root = createRoot(MOUNT_NODE);

@@ -2,18 +2,36 @@ import { Field } from 'ui';
 import InfiniteScroll from '@/components/Core/InfiniteScroll';
 import TopLineLoading from '@/components/Loading/TopLineLoading';
 import NoData from '@/components/NoData';
-import { IConcert } from '@/store/concerts/types';
 
 import { debounce } from 'lodash';
 
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import { useForm } from 'react-hook-form';
 import useConcertList from '@/containers/Concerts/hooks';
 
 import ConcertList from './ConcertList';
 import chunk from './helpers';
 
 const WAIT = 500;
+
+interface IArtist {
+  artist_id: number;
+  display_name: string;
+  uri: string;
+}
+
+export interface IConcert {
+  artist: IArtist;
+  city: string;
+  concert_id: number;
+  datetime: Date;
+  display_name: string;
+  lat: number;
+  lng: number;
+  popularity: number;
+  status: string;
+  type: string;
+  uri: string;
+}
 
 function Concerts(): JSX.Element {
   const [state, setState] = useState({ concert: [] });

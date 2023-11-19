@@ -1,3 +1,4 @@
 import useProfil from './useProfil';
+import useProfilUpdate from './useUpdateUserProfil';
 
-export default useProfil;
+export { useProfil, useProfilUpdate };

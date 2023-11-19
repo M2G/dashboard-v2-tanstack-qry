@@ -1,15 +1,13 @@
 import { AuthContext } from '@/AuthContext';
 import ProfilForm from '@/components/ProfilForm';
-import { useCallback, useContext, useEffect } from 'react';
-import useProfil from './hooks';
+import { useProfil, useProfilUpdate } from './hooks';
+import { useCallback, useContext } from 'react';
 
 function Profil(): JSX.Element | null {
   const { userData }: { userData: { id: number } } = useContext(AuthContext);
-  const { data, mutate } = useProfil();
-
-  useEffect(() => {
-    mutate({ id: userData?.id });
-  }, [mutate, userData]);
+  const { data, isLoading } = useProfil({ id: userData?.id });
+  const { mutate } = useProfilUpdate();
+  console.log('data data data data', data);
 
   const handleSubmit = useCallback(
     (d: unknown): void => {
@@ -18,26 +16,13 @@ function Profil(): JSX.Element | null {
     [mutate, userData],
   );
 
-  /*
-  const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(authGetUserProfilAction({ id: userData?.id }));
-  }, [dispatch, userData]);
-
-  const { auth: { data: { data } } = {} } = useSelector(({ auth }) => ({
-    auth,
-  }));
-
-  const handleSubmit = useCallback(
-    (data) => {
-      dispatch(authUpdateUserProfilAction({ ...data, id: userData?.id }));
-    },
-    [dispatch, userData?.id],
-  );
-  */
+  if (isLoading) return null;
 
   return (
-    data && <ProfilForm initialValues={{ ...data }} onSubmit={handleSubmit} />
+    <ProfilForm
+      initialValues={{ ...data?.data?.data }}
+      onSubmit={handleSubmit}
+    />
   );
 }
 

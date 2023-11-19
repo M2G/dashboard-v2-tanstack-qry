@@ -9,7 +9,7 @@ interface IUserList {
 
 function useUserList({ filters, page, pageSize }: IUserList) {
   return useQuery({
-    cacheTime: 0,
+    cacheTime: 30000,
     enabled: !!page && !!pageSize,
     queryFn: () =>
       getUsersService({
@@ -17,7 +17,7 @@ function useUserList({ filters, page, pageSize }: IUserList) {
         page,
         pageSize,
       }),
-    queryKey: ['userList'],
+    queryKey: ['userList', filters, page, pageSize],
     staleTime: Infinity,
   });
 }

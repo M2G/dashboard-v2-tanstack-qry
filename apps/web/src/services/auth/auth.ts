@@ -8,7 +8,7 @@ function recoverPasswordService(params: any): Promise<any> {
   return api.post('/auth/reset-password', params);
 }
 
-function userProfilService(id: string): Promise<any> {
+function userProfilService({ id }): Promise<any> {
   return api.get(`/auth/users/${id}`);
 }
 

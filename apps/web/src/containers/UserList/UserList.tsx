@@ -1,12 +1,5 @@
 import type { JSX, SetStateAction } from 'react';
-import {
-  useCallback,
-  useContext,
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
-} from 'react';
+import { useCallback, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import ModalWrapper from '@/components/Core/Modal/ModalWrapper';
@@ -29,12 +22,12 @@ import {
   useUserList,
 } from '@/containers/Users/hooks';
 
-type UserListProps = {
+interface UserListProps {
   canAdd: boolean;
   canDelete: boolean;
   canEdit: boolean;
   id: string;
-};
+}
 
 function UserList({
   canAdd = false,

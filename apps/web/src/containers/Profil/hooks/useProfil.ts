@@ -1,15 +1,23 @@
-import { UseMutationResult, useMutation } from '@tanstack/react-query';
-import { AxiosResponse } from 'axios';
-import { userProfilService } from '@/services/auth';
+import { UseQueryResult, useQuery } from '@tanstack/react-query';
 import { queryClient } from '@/App';
+import { userProfilService } from '@/services/auth';
+import { AxiosResponse } from 'axios';
 
-function useProfil(): UseMutationResult<AxiosResponse<any, any>> {
-  return useMutation({
-    mutationFn: userProfilService,
+interface IProfil {
+  id: number;
+}
+
+function useProfil({ id }: IProfil): UseQueryResult<AxiosResponse<any, any>> {
+  return useQuery({
+    cacheTime: 300000,
+    enabled: !!id,
     onSuccess: (): void => {
       // Invalidate and refetch
-      queryClient.invalidateQueries({ queryKey: ['profil'] });
+      queryClient.invalidateQueries({ queryKey: ['userProfil'] });
     },
+    queryFn: () => userProfilService({ id }),
+    queryKey: ['userProfil', id],
+    staleTime: Infinity,
   });
 }
 
