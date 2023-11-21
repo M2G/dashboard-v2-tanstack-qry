@@ -204,7 +204,7 @@ function UserList({
         />
       )}
       <UserFilters currentTerm={term} onSearchTerm={searchTerms} />
-      {results.length > 0 ? (
+      {results?.length > 0 ? (
         <List
           count={pageInfo?.count}
           currentPage={pagination?.page}
