@@ -21,7 +21,7 @@ export function Row({ tag = 'div', children, ...rest }: RowProps) {
   const DynamicTag = `${tag}` as keyof JSX.IntrinsicElements;
 
   return (
-    <DynamicTag {...rest} className={[rest.className ? rest.className : 'col-span-full'].join(' ')}>
+    <DynamicTag {...rest} className="o-grid__row">
       {children}
     </DynamicTag>
   );

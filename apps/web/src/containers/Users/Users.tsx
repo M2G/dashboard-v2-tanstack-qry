@@ -1,21 +1,25 @@
 import type { JSX } from 'react';
 import './index.scss';
 
+import { Col } from 'ui/components/layouts/Col/Col';
 import UserList from '@/containers/UserList/UserList';
+import { Zone } from 'ui/components/layouts/Zone/Zone';
+import { Grid } from 'ui/components/layouts/Grid/Grid';
+import { Row } from 'ui/components/layouts/Row/Row';
 
 function Users(): JSX.Element {
   return (
-    <div className="o-zone">
-      <div className="o-grid u-no-gutters">
-        <div className="o-grid__row">
-          <div className="o-col">
+    <Zone>
+      <Grid className="u-no-gutters">
+        <Row>
+          <Col className="o-col">
             <div className="o-cell--one">
               <UserList canAdd canDelete canEdit id="test" />
             </div>
-          </div>
-        </div>
-      </div>
-    </div>
+          </Col>
+        </Row>
+      </Grid>
+    </Zone>
   );
 }
 

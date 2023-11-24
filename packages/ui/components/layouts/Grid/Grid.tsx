@@ -21,7 +21,7 @@ export function Grid({ children, tag = 'div', ...rest }: GridProps) {
   const DynamicTag = `${tag}` as keyof JSX.IntrinsicElements;
 
   return (
-    <DynamicTag {...rest} className={['grid grid-cols-12 gap-x-2', rest.className].join(' ')}>
+    <DynamicTag {...rest} className={['o-grid', rest.className].join(' ')}>
       {children}
     </DynamicTag>
   );
