@@ -1,11 +1,7 @@
 import type { JSX } from 'react';
 import './index.scss';
-
-import { Col } from 'ui/components/layouts/Col/Col';
 import UserList from '@/containers/UserList/UserList';
-import { Zone } from 'ui/components/layouts/Zone/Zone';
-import { Grid } from 'ui/components/layouts/Grid/Grid';
-import { Row } from 'ui/components/layouts/Row/Row';
+import { Row, Grid, Zone, Col } from 'ui';
 
 function Users(): JSX.Element {
   return (

@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import { ReactNode } from 'react';
 
 interface RowProps {
@@ -17,7 +16,7 @@ interface RowProps {
  *
  * @returns {JSX.Element}
  */
-export function Row({ tag = 'div', children, ...rest }: RowProps) {
+function Row({ tag = 'div', children, ...rest }: RowProps) {
   const DynamicTag = `${tag}` as keyof JSX.IntrinsicElements;
 
   return (
@@ -27,7 +26,4 @@ export function Row({ tag = 'div', children, ...rest }: RowProps) {
   );
 }
 
-Row.propTypes = {
-  tag: PropTypes.oneOf(['div']),
-  children: PropTypes.node.isRequired,
-};
+export default Row;

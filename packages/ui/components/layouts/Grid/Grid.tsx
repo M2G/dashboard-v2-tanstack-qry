@@ -27,7 +27,4 @@ export function Grid({ children, tag = 'div', ...rest }: GridProps) {
   );
 }
 
-Grid.propTypes = {
-  tag: PropTypes.oneOf(['div']),
-  children: PropTypes.node.isRequired,
-};
+export default Grid;
