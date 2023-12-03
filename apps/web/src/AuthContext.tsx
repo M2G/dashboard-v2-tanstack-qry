@@ -10,7 +10,7 @@ import {
   setUserStorage,
 } from '@/services/storage';
 
-import jwt_decode from 'jwt-decode';
+import { jwtDecode } from 'jwt-decode';
 
 export const AuthContext: Context<NonNullable<unknown>> = createContext({});
 interface AuthContextProps {
@@ -30,7 +30,7 @@ function Provider({ children }: AuthContextProps): JSX.Element {
       const decodedToken: {
         email: string;
         id: number;
-      } = jwt_decode(token) || {};
+      } = jwtDecode(token) || {};
 
       const user = {
         email: decodedToken.email,

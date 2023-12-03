@@ -1,5 +1,5 @@
 import { memo } from 'react';
-import { Card } from 'ui/components/layouts/Card/Card';
+import Card from 'ui/components/layouts/Card/Card';
 
 type ConcertListProps = {
   city: string;
