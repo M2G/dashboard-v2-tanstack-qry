@@ -1,20 +1,20 @@
-import PropTypes from "prop-types";
-import { HTMLAttributes, ReactNode, useState } from "react";
+import PropTypes from 'prop-types';
+import { HTMLAttributes, ReactNode, useState } from 'react';
 
-import { AnyComponent } from "@types";
-import { Icon } from "../../atoms";
+import { AnyComponent } from '@types';
+import { Icon } from '../../atoms';
 
-import { ReactComponent as CloseIcon } from "../../../assets/icons/cross.svg";
+import { ReactComponent as CloseIcon } from '@/assets/icons/cross.svg';
 
-import { ReactComponent as DangerIcon } from "../../../assets/icons/danger.svg";
-import { ReactComponent as InfoIcon } from "../../../assets/icons/info.svg";
-import { ReactComponent as ValidIcon } from "../../../assets/icons/valid.svg";
-import { ReactComponent as WarningIcon } from "../../../assets/icons/warning.svg";
+import { ReactComponent as DangerIcon } from '@/assets/icons/danger.svg';
+import { ReactComponent as InfoIcon } from '@/assets/icons/info.svg';
+import { ReactComponent as ValidIcon } from '@/assets/icons/valid.svg';
+import { ReactComponent as WarningIcon } from '@/assets/icons/warning.svg';
 
 interface AlertProps extends HTMLAttributes<HTMLDivElement> {
-  tag?: "div";
-  type?: "danger" | "info" | "success" | "warning";
-  size?: "regular" | "small";
+  tag?: 'div';
+  type?: 'danger' | 'info' | 'success' | 'warning';
+  size?: 'regular' | 'small';
   children: ReactNode | string;
   closable?: boolean;
 }
@@ -27,15 +27,15 @@ export const Icons = {
 };
 
 export const AlertVariants = {
-  danger: "bg-danger-surface text-danger",
-  info: "bg-info-surface text-info",
-  success: "bg-success-surface text-success",
-  warning: "bg-warning-surface text-warning",
+  danger: 'bg-danger-surface text-danger',
+  info: 'bg-info-surface text-info',
+  success: 'bg-success-surface text-success',
+  warning: 'bg-warning-surface text-warning',
 };
 
 export const AlertSizes = {
-  small: "px-4 py-2.5",
-  regular: "px-4 py-4",
+  small: 'px-4 py-2.5',
+  regular: 'px-4 py-4',
 };
 
 /**
@@ -48,12 +48,12 @@ export const AlertSizes = {
  *
  * @returns {JSX.Element}
  */
-export function Alert({
-  tag = "div",
+function Alert({
+  tag = 'div',
   children,
-  type = "info",
+  type = 'info',
   closable = true,
-  size = "regular",
+  size = 'regular',
   ...rest
 }: AlertProps) {
   const [show, setShow] = useState<boolean>(true);
@@ -63,18 +63,17 @@ export function Alert({
     <DynamicTag
       {...rest}
       className={[
-        "items-centner relative hidden min-w-[70px] justify-between px-3 py-4 tracking-wide",
+        'items-centner relative hidden min-w-[70px] justify-between px-3 py-4 tracking-wide',
         AlertVariants[type],
         AlertSizes[size],
         rest.className,
-        show && "_:inline-flex",
-      ].join(" ")}
-    >
+        show && '_:inline-flex',
+      ].join(' ')}>
       <Icon
         as={Icons[type]}
         className="min-w-5 mr-4 mt-0.5 h-5 max-h-5 w-5 text-current"
       />
-      <p className="mb-0 w-full text-variants-80">{children}</p>
+      <p className="text-variants-80 mb-0 w-full">{children}</p>
       {closable && (
         <button
           onClick={(ev) => {
@@ -82,13 +81,12 @@ export function Alert({
             setShow(false);
           }}
           className={[
-            "-mr2 relative -mt-2 ml-4 -translate-y-[1px]",
-            "rounded bg-transparent p-2 text-current transition-colors hover:bg-secondary/5",
-          ].join(" ")}
-        >
+            '-mr2 relative -mt-2 ml-4 -translate-y-[1px]',
+            'hover:bg-secondary/5 rounded bg-transparent p-2 text-current transition-colors',
+          ].join(' ')}>
           <Icon
             as={CloseIcon}
-            className="_:min-w-4 h-4 max-h-4 text-black _:w-4"
+            className="_:min-w-4 _:w-4 h-4 max-h-4 text-black"
           />
         </button>
       )}
@@ -96,10 +94,12 @@ export function Alert({
   );
 }
 
+export default Alert;
+
 Alert.propTypes = {
   tag: PropTypes.string,
-  type: PropTypes.oneOf(["danger", "info", "success", "warning"]),
-  size: PropTypes.oneOf(["regular", "small"]),
+  type: PropTypes.oneOf(['danger', 'info', 'success', 'warning']),
+  size: PropTypes.oneOf(['regular', 'small']),
   children: PropTypes.string.isRequired,
   closable: PropTypes.bool,
 };

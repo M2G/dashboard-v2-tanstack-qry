@@ -1,5 +1,10 @@
 import PropTypes from 'prop-types';
-import { FC, HTMLInputTypeAttribute, InputHTMLAttributes, ReactNode } from 'react';
+import {
+  FC,
+  HTMLInputTypeAttribute,
+  InputHTMLAttributes,
+  ReactNode,
+} from 'react';
 import { FieldErrors } from 'react-hook-form';
 
 import { AnyComponent } from '@types';
@@ -17,7 +22,8 @@ import { AnyComponent } from '@types';
  *
  * @returns {JSX.Element}
  */
-interface FieldProps extends InputHTMLAttributes<HTMLInputElement | HTMLTextAreaElement> {
+interface FieldProps
+  extends InputHTMLAttributes<HTMLInputElement | HTMLTextAreaElement> {
   errors?: FieldErrors;
   icon?: ReactNode;
   label: string;
@@ -40,7 +46,7 @@ export const StatusVariants = {
   warning: 'border-2 border-warning _:focus:border-warning',
 };
 
-export const Field: FC<FieldProps> = ({
+const Field: FC<FieldProps> = ({
   // basics
   className = '',
   errors,
@@ -106,6 +112,8 @@ export const Field: FC<FieldProps> = ({
     </div>
   );
 };
+
+export default Field;
 
 Field.propTypes = {
   label: PropTypes.string.isRequired,

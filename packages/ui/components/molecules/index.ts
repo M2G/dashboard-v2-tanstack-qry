@@ -1,1 +1,4 @@
-export { Field } from './Field/Field';
+import Alert from './Alert';
+import Field from './Field';
+
+export { Alert, Field };

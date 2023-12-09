@@ -1,7 +1,9 @@
 import type { JSX } from 'react';
-import './index.scss';
+
+import { Cell, Col, Grid, Row, Zone } from 'ui';
 import UserList from '@/containers/UserList/UserList';
-import { Row, Grid, Zone, Col } from 'ui';
+
+import './index.scss';
 
 function Users(): JSX.Element {
   return (
@@ -9,9 +11,9 @@ function Users(): JSX.Element {
       <Grid className="u-no-gutters">
         <Row>
           <Col className="o-col">
-            <div className="o-cell--one">
+            <Cell className="o-cell--one">
               <UserList canAdd canDelete canEdit id="test" />
-            </div>
+            </Cell>
           </Col>
         </Row>
       </Grid>
