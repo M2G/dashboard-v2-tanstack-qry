@@ -12,6 +12,7 @@ function ConcertList({
   display_name: displayName,
   uri,
 }: ConcertListProps) {
+  //@TODO: add icon svg and use component
   return (
     <div className="o-col--one-quarter--large o-col--half--medium">
       <div className="o-cell--one">
