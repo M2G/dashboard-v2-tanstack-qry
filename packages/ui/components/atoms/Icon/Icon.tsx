@@ -1,7 +1,7 @@
-import PropTypes from "prop-types";
-import { FC, SVGProps } from "react";
+import PropTypes from 'prop-types';
+import { FC, SVGProps } from 'react';
 
-import { AnyComponent } from "@types";
+import { AnyComponent } from '@types';
 
 export interface IconProps extends SVGProps<SVGElement> {
   as: AnyComponent;
@@ -18,18 +18,20 @@ export interface IconProps extends SVGProps<SVGElement> {
  * import { ReactComponent as PlusIcon } from "../../../assets/icons";
  * <Icon as={PlusIcon} />
  **/
-export const Icon: FC<IconProps> = ({ as, ...rest }) => {
+const Icon: FC<IconProps> = ({ as, ...rest }) => {
   const DynamicIcon = as || (`${as}` as keyof AnyComponent);
 
   return (
     <DynamicIcon
       {...rest}
-      className={["min-w-6 min-h-6 h-6 w-6 fill-current", rest.className].join(
-        " "
+      className={['min-w-6 min-h-6 h-6 w-6 fill-current', rest.className].join(
+        ' ',
       )}
     />
   );
 };
+
+export default Icon;
 
 Icon.propTypes = {
   as: PropTypes.any.isRequired,

@@ -2,7 +2,7 @@ import path from 'path';
 import { defineConfig } from 'vite';
 
 import react from '@vitejs/plugin-react-swc';
-import svgr from 'vite-plugin-svgr';
+import svgr from '@svgr/rollup';
 
 import packageJson from './package.json';
 
@@ -24,9 +24,9 @@ export default defineConfig(() => {
       alias: {
         // Needed for `useSelector` tracking in wdyr.tsx: https://github.com/welldone-software/why-did-you-render/issues/85
         //@see only with react-redux
+        '@': path.resolve(__dirname, './src'),
         //'react-redux': 'react-redux/dist/react-redux.js',
         '@types': path.resolve(__dirname, './src/@types'),
-        '@': path.resolve(__dirname, './src'),
         api: path.resolve(__dirname, './src/api/'),
         api2: path.resolve(__dirname, './src/api2/'),
         assets: path.resolve(__dirname, './src/assets/'),

@@ -1,5 +1,6 @@
 import { memo } from 'react';
-import Card from 'ui/components/layouts/Card/Card';
+import { Cell, Col, Card, Icon } from 'ui';
+import { ReactComponent as ArrowLeft } from '@/assets/icons/arrow-left.svg';
 
 type ConcertListProps = {
   city: string;
@@ -14,8 +15,8 @@ function ConcertList({
 }: ConcertListProps) {
   //@TODO: add icon svg and use component
   return (
-    <div className="o-col--one-quarter--large o-col--half--medium">
-      <div className="o-cell--one">
+    <Col className="o-col--one-quarter--large o-col--half--medium">
+      <Cell className="o-cell--one">
         <Card className="mb-5 border-[hsla(0deg,0%,100%,0.1)]">
           {displayName && (
             <a href="#test">
@@ -34,25 +35,16 @@ function ConcertList({
               className="inline-flex items-center rounded-lg bg-blue-700 px-3 py-2 text-center text-sm font-medium text-white hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
               href={uri}>
               Read more
-              <svg
-                aria-hidden="true"
-                className="ml-2 h-3.5 w-3.5"
+              <Icon
+                as={ArrowLeft}
+                className="_:ml-2 _:h-3.5 _:w-3.5"
                 fill="none"
-                viewBox="0 0 14 10"
-                xmlns="http://www.w3.org/2000/svg">
-                <path
-                  d="M1 5h12m0 0L9 1m4 4L9 9"
-                  stroke="currentColor"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                />
-              </svg>
+              />
             </a>
           )}
         </Card>
-      </div>
-    </div>
+      </Cell>
+    </Col>
   );
 }
 

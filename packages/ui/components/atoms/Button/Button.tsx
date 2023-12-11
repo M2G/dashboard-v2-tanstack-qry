@@ -41,7 +41,7 @@ export const ButtonSizes = {
  *
  * @returns {JSX.Element}
  */
-export const Button: FC<ButtonProps> = ({
+const Button: FC<ButtonProps> = ({
   children,
   icon,
   size = 'regular',
@@ -68,6 +68,8 @@ export const Button: FC<ButtonProps> = ({
     </DynamicTag>
   );
 };
+
+export default Button;
 
 Button.propTypes = {
   children: PropTypes.string.isRequired,

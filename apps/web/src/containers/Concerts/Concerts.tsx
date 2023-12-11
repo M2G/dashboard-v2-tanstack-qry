@@ -1,4 +1,4 @@
-import { Field } from 'ui';
+import { Field, Grid, Row, Zone } from 'ui';
 import InfiniteScroll from '@/components/Core/InfiniteScroll';
 import TopLineLoading from '@/components/Loading/TopLineLoading';
 import NoData from '@/components/NoData';
@@ -93,9 +93,9 @@ function Concerts(): JSX.Element {
             concert && prevState?.concert && !term
               ? [...prevState?.concert, ...concert]
               : concert && prevState?.concert && term
-              ? [...concert]
-              : [],
-        } as any),
+                ? [...concert]
+                : [],
+        }) as any,
     );
   }, [concert, term]);
 
@@ -115,8 +115,8 @@ function Concerts(): JSX.Element {
   if (isLoading) return <TopLineLoading />;
 
   return (
-    <div className="o-zone c-home">
-      <div className="o-grid">
+    <Zone className="c-home">
+      <Grid>
         <div className="flex items-center">
           <input
             className="placeholder:text-grey-dark -ml-px mb-px w-full rounded-none border-b border-[hsla(0deg,0%,100%,0.1)] bg-transparent p-2 text-[rgb(113_113_122/var(--tw-text-opacity))] focus:shadow-none focus:outline-none"
@@ -134,9 +134,7 @@ function Concerts(): JSX.Element {
             loading={concert?.loading}
             onLoadMore={loadMore}>
             {chunk(concertList, 4)?.map((nodes) => (
-              <div
-                className="o-grid__row"
-                key={`concert_${nodes?.[0]?.datetime}`}>
+              <Row key={`concert_${nodes?.[0]?.datetime}`}>
                 {nodes?.map((node: IConcert) => (
                   <ConcertList
                     city={node?.city}
@@ -145,14 +143,14 @@ function Concerts(): JSX.Element {
                     uri={node?.uri}
                   />
                 ))}
-              </div>
+              </Row>
             ))}
           </InfiniteScroll>
         ) : (
           <NoData />
         )}
-      </div>
-    </div>
+      </Grid>
+    </Zone>
   );
 }
 
