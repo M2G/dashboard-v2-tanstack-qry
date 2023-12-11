@@ -1,6 +1,5 @@
 import { memo } from 'react';
-import { Cell, Col, Card, Icon } from 'ui';
-import { ReactComponent as ArrowLeft } from '@/assets/icons/arrow-left.svg';
+import { Cell, Col, Card } from 'ui';
 
 type ConcertListProps = {
   city: string;
@@ -35,11 +34,6 @@ function ConcertList({
               className="inline-flex items-center rounded-lg bg-blue-700 px-3 py-2 text-center text-sm font-medium text-white hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
               href={uri}>
               Read more
-              <Icon
-                as={ArrowLeft}
-                className="_:ml-2 _:h-3.5 _:w-3.5"
-                fill="none"
-              />
             </a>
           )}
         </Card>
