@@ -69,8 +69,6 @@ const Button: FC<ButtonProps> = ({
   );
 };
 
-export default Button;
-
 Button.propTypes = {
   children: PropTypes.string.isRequired,
   icon: PropTypes.any,
@@ -79,3 +77,5 @@ Button.propTypes = {
   tag: PropTypes.any,
   variant: PropTypes.oneOf(['primary', 'secondary']),
 };
+
+export default Button;
