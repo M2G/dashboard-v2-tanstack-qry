@@ -2,18 +2,10 @@ import type { Dispatch, JSX, ReactNode, SetStateAction } from 'react';
 
 import clsx from 'clsx';
 
-import Background from './Background';
-
 interface ISidebar {
   children: ReactNode;
   setIsOpened: Dispatch<SetStateAction<boolean>>;
   show: boolean;
-}
-
-interface ISidebarWrapper {
-  children: ReactNode;
-  isOpened: boolean;
-  setIsOpened: Dispatch<SetStateAction<boolean>>;
 }
 
 function Sidebar({ children, setIsOpened, show }: ISidebar): JSX.Element {
@@ -50,20 +42,4 @@ function Sidebar({ children, setIsOpened, show }: ISidebar): JSX.Element {
     </div>
   );
 }
-
-function SidebarWrapper({
-  children,
-  isOpened,
-  setIsOpened,
-}: ISidebarWrapper): JSX.Element {
-  return (
-    <>
-      <Background setIsOpened={setIsOpened} show={isOpened} />
-      <Sidebar setIsOpened={setIsOpened} show={isOpened}>
-        {children}
-      </Sidebar>
-    </>
-  );
-}
-
-export default SidebarWrapper;
+export default Sidebar;
