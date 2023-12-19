@@ -60,7 +60,7 @@ function UserList({
     pageSize: pagination.pageSize,
   });
 
-  const { mutate: mutatecDelete } = useDeleteUser();
+  const { mutate: mutateDelete } = useDeleteUser();
   const { mutate: mutateEdit } = useEditUser();
   const { mutate: mutateCreate } = useCreateUser();
 
@@ -139,10 +139,10 @@ function UserList({
 
   const onDeleteUser = useCallback(
     (user: { id: { id: string } }): void => {
-      mutatecDelete({ id: user.id });
+      mutateDelete({ id: user.id });
       handleAction({ deletingUser: false, editingUser: false, newUser: false });
     },
-    [handleAction, mutatecDelete],
+    [handleAction, mutateDelete],
   );
 
   const users = data?.data?.data || [];
