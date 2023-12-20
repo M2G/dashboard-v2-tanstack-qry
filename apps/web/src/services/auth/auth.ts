@@ -1,28 +1,41 @@
+import { AxiosResponse } from 'axios';
+
 import api from '@/api';
 
-function forgotPasswordService(params: any): Promise<any> {
+function forgotPasswordService(params: any): Promise<AxiosResponse> {
   return api.post('/auth/forgot-password', params);
 }
 
-function recoverPasswordService(params: any): Promise<any> {
+function recoverPasswordService(params: any): Promise<AxiosResponse> {
   return api.post('/auth/reset-password', params);
 }
 
-function userProfilService({ id }): Promise<any> {
+function userProfilService({ id }: { id: string }): Promise<AxiosResponse> {
   return api.get(`/auth/users/${id}`);
 }
 
-function createUserProfilService(params: any): Promise<any> {
+function createUserProfilService(params: any): Promise<AxiosResponse> {
   // return api.post(`/users`, params);
   // TODO
   return api.post('/auth/register', params);
 }
 
-function updateUserProfilService({ id, ...params }: any): Promise<any> {
+function updateUserProfilService({
+  id,
+  ...params
+}: any): Promise<AxiosResponse> {
   return api.put(`/auth/users/${id}`, params);
 }
 
-function getUsersService({ filters, page, pageSize }): Promise<any> {
+function getUsersService({
+  filters,
+  page,
+  pageSize,
+}: {
+  filters: string;
+  page: number;
+  pageSize: number;
+}): Promise<any> {
   return api.get(
     `/auth/users${
       filters

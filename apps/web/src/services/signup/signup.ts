@@ -1,7 +1,7 @@
 import { AxiosResponse } from 'axios';
 import api from '@/api';
 
-function signupUserService(params): Promise<AxiosResponse<any, any>> {
+function signupUserService(params): Promise<AxiosResponse> {
   return api.post('/auth/register', params);
 }
 

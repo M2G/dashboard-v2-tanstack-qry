@@ -1,8 +1,7 @@
 import { AxiosResponse } from 'axios';
 import api from '@/api';
 
-function signinService(params): Promise<AxiosResponse<any, any>> {
-  console.log('params params params', params);
+function signinService(params: any): Promise<AxiosResponse> {
   return api.post('/auth/authenticate', params);
 }
 
