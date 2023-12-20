@@ -1,12 +1,13 @@
-import { AxiosResponse } from 'axios';
-
 import api from '@/api';
 
-function forgotPasswordService(params: any): Promise<AxiosResponse> {
+import { ICreateUser, IUser } from '@/types';
+import { AxiosResponse } from 'axios';
+
+function forgotPasswordService(params: string): Promise<AxiosResponse> {
   return api.post('/auth/forgot-password', params);
 }
 
-function recoverPasswordService(params: any): Promise<AxiosResponse> {
+function recoverPasswordService(params: string): Promise<AxiosResponse> {
   return api.post('/auth/reset-password', params);
 }
 
@@ -14,7 +15,7 @@ function userProfilService({ id }: { id: string }): Promise<AxiosResponse> {
   return api.get(`/auth/users/${id}`);
 }
 
-function createUserProfilService(params: any): Promise<AxiosResponse> {
+function createUserProfilService(params: ICreateUser): Promise<AxiosResponse> {
   // return api.post(`/users`, params);
   // TODO
   return api.post('/auth/register', params);
@@ -23,7 +24,7 @@ function createUserProfilService(params: any): Promise<AxiosResponse> {
 function updateUserProfilService({
   id,
   ...params
-}: any): Promise<AxiosResponse> {
+}: IUser): Promise<AxiosResponse> {
   return api.put(`/auth/users/${id}`, params);
 }
 
@@ -35,7 +36,7 @@ function getUsersService({
   filters: string;
   page: number;
   pageSize: number;
-}): Promise<any> {
+}): Promise<AxiosResponse> {
   return api.get(
     `/auth/users${
       filters

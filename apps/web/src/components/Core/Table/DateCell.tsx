@@ -2,16 +2,14 @@ interface IDateCell {
   readonly date?: number;
 }
 
-function DateCell({ date }: IDateCell): JSX.Element {
+function DateCell({ date }: IDateCell): JSX.Element | undefined {
   return (
-    <div className="date_cell">
-      {date ? (
-        <>
-          <div>{new Date(date).toLocaleDateString()}</div>
-          <div>{new Date(date).toLocaleTimeString()}</div>
-        </>
-      ) : null}
-    </div>
+    date && (
+      <div className="date_cell">
+        <div>{new Date(date).toLocaleDateString()}</div>
+        <div>{new Date(date).toLocaleTimeString()}</div>
+      </div>
+    )
   );
 }
 

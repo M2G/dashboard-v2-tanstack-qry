@@ -27,3 +27,18 @@ export interface IUser {
   modified_at: Date | null;
   password: null | string;
 }
+
+export interface ISignup {
+  email: string;
+  password: string;
+}
+
+export interface ISignin {
+  email: string;
+  password: string;
+}
+
+export interface ICreateUser {
+  email: string;
+  password: string;
+}
