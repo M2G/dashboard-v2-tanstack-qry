@@ -7,8 +7,7 @@ function useForgotPassword(): UseMutationResult<AxiosResponse<any, any>> {
   return useMutation({
     mutationFn: forgotPasswordService,
     onSuccess: (): void => {
-      // Invalidate and refetch
-      queryClient.invalidateQueries({ queryKey: ['resetPassword'] });
+      queryClient.invalidateQueries({ queryKey: ['forgotPassword'] });
     },
   });
 }

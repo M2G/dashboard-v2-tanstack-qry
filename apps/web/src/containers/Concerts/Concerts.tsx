@@ -8,30 +8,11 @@ import { debounce } from 'lodash';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import useConcertList from '@/containers/Concerts/hooks';
 
+import { IConcert } from '@/types';
 import ConcertList from './ConcertList';
 import chunk from './helpers';
 
 const WAIT = 500;
-
-interface IArtist {
-  artist_id: number;
-  display_name: string;
-  uri: string;
-}
-
-export interface IConcert {
-  artist: IArtist;
-  city: string;
-  concert_id: number;
-  datetime: Date;
-  display_name: string;
-  lat: number;
-  lng: number;
-  popularity: number;
-  status: string;
-  type: string;
-  uri: string;
-}
 
 function Concerts(): JSX.Element {
   const [state, setState] = useState({ concert: [] });
