@@ -5,6 +5,9 @@ enum IconNames {
   ARROW_UP = 'ArrowUp',
   DELETE = 'Delete',
   EDIT = 'Edit',
+  HOME = 'Home',
+  PROFIL = 'Profil',
+  PROFILS = 'Profils',
 }
 
 export type IconComponent = ComponentType<SVGAttributes<SVGElement>>;
