@@ -1,5 +1,6 @@
-import Icon from '@/components/Core/Icon';
-import type IconNames from '@/components/Core/Icon/Icons.types';
+import type IconNames from 'ui/components/atoms/Icon/Icons.types';
+
+import { Icon } from 'ui';
 
 interface IAction {
   actions: [
@@ -16,8 +17,8 @@ function Action({ actions }: IAction): JSX.Element[] | undefined {
     <div className="cursor-pointer px-2" key={`actionCol__${id}`}>
       <div aria-hidden="true" id={id} onClick={action}>
         <Icon
+          as={icon as IconNames}
           className="fill-grey-dark w-4 cursor-pointer"
-          icon={icon as IconNames}
         />
       </div>
     </div>

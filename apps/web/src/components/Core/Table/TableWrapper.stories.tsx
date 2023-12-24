@@ -1,6 +1,6 @@
 import Icon from '@/components/Core/Icon';
 import { actions } from '@/fixtures/action';
-import IconNames from '@/omponents/Core/Icon/Icons.types';
+import IconNames from '@/components/Core/Icon/Icons.types';
 import DateCell from './DateCell';
 import TableStaticCol from './TableStaticCol';
 import TableWrapper from './TableWrapper';
