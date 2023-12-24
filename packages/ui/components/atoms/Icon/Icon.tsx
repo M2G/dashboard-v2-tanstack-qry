@@ -1,10 +1,11 @@
 import PropTypes from 'prop-types';
-import { FC, SVGProps } from 'react';
+import { SVGProps, useMemo } from 'react';
 
-import { AnyComponent } from '@types';
+import type IconNames from './Icons.types';
 
+import Icons from './Icons';
 export interface IconProps extends SVGProps<SVGElement> {
-  as: AnyComponent;
+  as: IconNames;
 }
 
 /**
@@ -17,19 +18,21 @@ export interface IconProps extends SVGProps<SVGElement> {
  * @example
  * import { ReactComponent as PlusIcon } from "../../../assets/icons";
  * <Icon as={PlusIcon} />
- **/
-const Icon: FC<IconProps> = ({ as, ...rest }) => {
-  const DynamicIcon = as || (`${as}` as keyof AnyComponent);
-
+ * */
+function Icon({ as, ...rest }: IconProps): JSX.Element {
+  const DynamicIcon = useMemo(
+    () => Icons?.[as || (`${as}` as IconNames)],
+    [as],
+  );
   return (
     <DynamicIcon
       {...rest}
-      className={['min-w-6 min-h-6 h-6 w-6 fill-current', rest.className].join(
+      className={['min-w-4 min-h-4 h-4 w-4 fill-current', rest.className].join(
         ' ',
       )}
     />
   );
-};
+}
 
 export default Icon;
 
