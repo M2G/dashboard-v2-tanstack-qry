@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 
 import ROUTER_PATH from '@/constants/RouterPath';
 import { Icon } from 'ui';
-import Icons from '@/components/Core/Icon/Icons';
+import IconNames from 'ui/components/atoms/Icon/Icons.types';
 
 function Sidebar(): JSX.Element {
   const { t } = useTranslation();
@@ -16,8 +16,8 @@ function Sidebar(): JSX.Element {
         <ul className="nav flex flex-col justify-center pt-4">
           <li className="mb-4 flex items-center">
             <Icon
-              as={Icons.Home}
-              className="_:stroke-white _:stroke-1 _:h-5 _:w-5 _:min-h-5"
+              as={IconNames.HOME}
+              className="_:stroke-white _:stroke-1.5 _:h-5 _:w-5 _:min-h-5"
             />
             <a
               aria-current="page"
@@ -28,8 +28,8 @@ function Sidebar(): JSX.Element {
           </li>
           <li className="mb-4 flex stroke-white">
             <Icon
-              as={Icons.Profil}
-              className="_:stroke-white _:stroke-1 _:h-5 _:w-5 _:min-h-5"
+              as={IconNames.PROFIL}
+              className="_:stroke-white _:stroke-1.5 _:h-5 _:w-5 _:min-h-5"
             />
             <a
               aria-current="page"
@@ -40,8 +40,8 @@ function Sidebar(): JSX.Element {
           </li>
           <li className="mb-4 flex stroke-white">
             <Icon
-              as={Icons.Profils}
-              className="_:stroke-white _:stroke-1 _:h-5 _:w-5 _:min-h-5"
+              as={IconNames.PROFILS}
+              className="_:stroke-white _:stroke-1.5 _:h-5 _:w-5 _:min-h-5"
             />
             <a
               aria-current="page"
@@ -52,8 +52,8 @@ function Sidebar(): JSX.Element {
           </li>
           <li className="mb-4 flex stroke-white">
             <Icon
-              as={Icons.Profils}
-              className="_:stroke-white _:stroke-1 _:h-5 _:w-5 _:min-h-5"
+              as={IconNames.PROFILS}
+              className="_:stroke-white _:stroke-1.5 _:h-5 _:w-5 _:min-h-5"
             />
             <a
               aria-current="page"

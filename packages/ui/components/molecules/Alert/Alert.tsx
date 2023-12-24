@@ -2,7 +2,7 @@ import { AnyComponent } from '@types';
 import PropTypes from 'prop-types';
 import { HTMLAttributes, ReactNode, useState } from 'react';
 
-import { ReactComponent as CloseIcon } from '../../../assets/icons/cross.svg';
+import { ReactComponent as CloseIcon } from '../../../assets/icons/close.svg';
 import { ReactComponent as DangerIcon } from '../../../assets/icons/danger.svg';
 import { ReactComponent as InfoIcon } from '../../../assets/icons/info.svg';
 import { ReactComponent as ValidIcon } from '../../../assets/icons/valid.svg';
