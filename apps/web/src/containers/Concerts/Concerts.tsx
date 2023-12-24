@@ -5,7 +5,14 @@ import NoData from '@/components/NoData';
 
 import { debounce } from 'lodash';
 
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import {
+  SetStateAction,
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from 'react';
 import useConcertList from '@/containers/Concerts/hooks';
 
 import { IConcert } from '@/types';
@@ -76,7 +83,7 @@ function Concerts(): JSX.Element {
               : concert && prevState?.concert && term
                 ? [...concert]
                 : [],
-        }) as any,
+        }) as SetStateAction<any>,
     );
   }, [concert, term]);
 

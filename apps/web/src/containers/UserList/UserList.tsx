@@ -21,6 +21,7 @@ import {
   useEditUser,
   useUserList,
 } from '@/containers/Users/hooks';
+import { IUser } from '@/types';
 
 interface UserListProps {
   canAdd: boolean;
@@ -84,7 +85,7 @@ function UserList({
   );
 
   const onEditUser = useCallback(
-    (user: any): void => {
+    (user: IUser): void => {
       mutateEdit({ id: state.editingUser.id, ...user });
       handleAction({ deletingUser: false, editingUser: false, newUser: false });
     },

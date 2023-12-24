@@ -2,7 +2,7 @@ import type { JSX } from 'react';
 import DateCell from '@/components/Core/Table/DateCell';
 import type { ITableStaticCol } from '@/components/Core/Table/TableStaticCol';
 import TableStaticCol from '@/components/Core/Table/TableStaticCol';
-import IconNames from '@/components/Core/Icon/Icons.types';
+import IconNames from 'ui/components/atoms/Icon/Icons.types';
 
 export interface IUserListItem {
   id: string;
@@ -15,13 +15,13 @@ export interface IUserListItem {
 }
 
 function userListItem({
-  id: rowId,
-  user,
-  label,
-  onEdit,
-  onDelete,
   canDelete,
   canEdit,
+  id: rowId,
+  label,
+  onDelete,
+  onEdit,
+  user,
 }: IUserListItem): (
   | {
       display: Date | number | string | undefined;
