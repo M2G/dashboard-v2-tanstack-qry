@@ -1,7 +1,7 @@
+import { AnyComponent } from '@types';
+
 import PropTypes from 'prop-types';
 import { ButtonHTMLAttributes, FC, ReactNode } from 'react';
-
-import { AnyComponent } from '@types';
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   children: ReactNode;
@@ -41,14 +41,14 @@ export const ButtonSizes = {
  *
  * @returns {JSX.Element}
  */
-const Button: FC<ButtonProps> = ({
+function Button({
   children,
   icon,
   size = 'regular',
   tag = 'button',
   variant = 'primary',
   ...rest
-}) => {
+}: ButtonProps) {
   const DynamicTag = tag || (`${tag}` as keyof AnyComponent);
 
   return (
@@ -67,7 +67,7 @@ const Button: FC<ButtonProps> = ({
       {children}
     </DynamicTag>
   );
-};
+}
 
 Button.propTypes = {
   children: PropTypes.string.isRequired,
