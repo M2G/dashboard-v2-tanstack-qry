@@ -13,8 +13,8 @@ function TableBody({ id }: ITableBody): JSX.Element {
         {getSortedTable?.map((row: { display: any }[], indexRow: number) => (
           <tr
             className="border-semi-10-contrast border-b-solid border-b-[1px]"
-            key={`bodyTable__${id}__${indexRow}` as any}>
-            {row?.map(({ display }: any, indexCol: any) => (
+            key={`bodyTable__${id}__${indexRow}` as string}>
+            {row?.map(({ display }: any, indexCol: number) => (
               <td
                 className="border-semi-10-contrast border-b-solid border-b-[1px]"
                 key={`bodyTable__${id}__${indexCol}` as any}>

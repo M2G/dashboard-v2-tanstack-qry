@@ -1,4 +1,4 @@
-import type IconNames from 'ui/components/atoms/Icon/Icons.types';
+import type IconNames from '@/components/Core/Icon/Icons.types';
 import Action from '@/components/Core/Table/Action';
 
 export interface ITableStaticCol {
@@ -15,14 +15,14 @@ export interface ITableStaticCol {
 
 function TableStaticCol({ actions, id, label }: ITableStaticCol): JSX.Element {
   return (
-    label && (
-      <div className="flex">
+    <div className="flex">
+      {label && (
         <div className="labelHandler">
           <label id={id}>{label}</label>
         </div>
-        {actions?.length > 0 && Action({ actions })}
-      </div>
-    )
+      )}
+      {actions?.length > 0 && Action({ actions })}
+    </div>
   );
 }
 
