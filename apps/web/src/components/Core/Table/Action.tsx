@@ -1,6 +1,6 @@
-import type IconNames from 'ui/components/atoms/Icon/Icons.types';
-
+import { memo } from 'react';
 import { Icon } from 'ui';
+import type IconNames from 'ui/components/atoms/Icon/Icons.types';
 
 interface IAction {
   actions: [
@@ -25,4 +25,4 @@ function Action({ actions }: IAction): JSX.Element[] | undefined {
   ));
 }
 
-export default Action;
+export default memo(Action);
