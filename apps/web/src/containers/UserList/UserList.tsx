@@ -2,8 +2,7 @@ import type { JSX, SetStateAction } from 'react';
 import { useCallback, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import ModalWrapper from '@/components/Core/Modal/ModalWrapper';
-import SidebarWrapper from '@/components/Core/Sidebar/SidebarWrapper';
+import { Modal, Sidebar } from 'ui/components/organisms';
 import TopLineLoading from '@/components/Loading/TopLineLoading';
 
 import NoData from '@/components/NoData';
@@ -220,7 +219,7 @@ function UserList({
       ) : (
         <NoData />
       )}
-      <SidebarWrapper
+      <Sidebar
         setIsOpened={() =>
           handleAction({
             deletingUser: false,
@@ -232,9 +231,9 @@ function UserList({
         {state.editingUser && (
           <UserEdit initialValues={state.editingUser} onSubmit={onEditUser} />
         )}
-      </SidebarWrapper>
+      </Sidebar>
 
-      <SidebarWrapper
+      <Sidebar
         setIsOpened={() =>
           handleAction({
             deletingUser: false,
@@ -244,9 +243,9 @@ function UserList({
         }
         isOpened={!!state.newUser}>
         {state.newUser && <UserNew onSubmit={onNewUser} />}
-      </SidebarWrapper>
+      </Sidebar>
 
-      <ModalWrapper
+      <Modal
         hide={() =>
           handleAction({
             deletingUser: false,
@@ -260,7 +259,7 @@ function UserList({
         isShowing={state.deletingUser}
         title="Delete">
         <p>{t('alert.warning')}</p>
-      </ModalWrapper>
+      </Modal>
     </div>
   );
 }

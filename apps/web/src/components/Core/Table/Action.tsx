@@ -3,17 +3,17 @@ import { Icon } from 'ui';
 import type IconNames from 'ui/components/atoms/Icon/Icons.types';
 
 interface IAction {
-  actions: [
-    {
-      action: () => void;
-      icon?: string;
-      id: string;
-    },
-  ];
+  action: () => void;
+  icon?: string;
+  id: string;
 }
 
-function Action({ actions }: IAction): JSX.Element[] | undefined {
-  return actions?.map(({ action, icon, id }) => (
+interface IAction {
+  actions: IAction[];
+}
+
+function Action({ id, action, icon }: IAction): JSX.Element {
+  return (
     <div className="cursor-pointer px-2" key={`actionCol__${id}`}>
       <div aria-hidden="true" id={id} onClick={action}>
         <Icon
@@ -22,7 +22,20 @@ function Action({ actions }: IAction): JSX.Element[] | undefined {
         />
       </div>
     </div>
+  );
+}
+
+const MomoizedAction = memo(Action);
+
+function Actions({ actions }: IAction): JSX.Element[] | undefined {
+  return actions?.map(({ action, icon, id }) => (
+    <MomoizedAction
+      action={action}
+      icon={icon}
+      id={id}
+      key={`actionCol__${id}`}
+    />
   ));
 }
 
-export default memo(Action);
+export default Actions;
