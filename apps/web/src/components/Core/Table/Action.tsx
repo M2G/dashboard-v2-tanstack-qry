@@ -8,11 +8,11 @@ interface IAction {
   id: string;
 }
 
-interface IAction {
+interface IActions {
   actions: IAction[];
 }
 
-function Action({ id, action, icon }: IAction): JSX.Element {
+function Action({ action, icon, id }: IAction): JSX.Element {
   return (
     <div className="cursor-pointer px-2" key={`actionCol__${id}`}>
       <div aria-hidden="true" id={id} onClick={action}>
@@ -27,7 +27,7 @@ function Action({ id, action, icon }: IAction): JSX.Element {
 
 const MomoizedAction = memo(Action);
 
-function Actions({ actions }: IAction): JSX.Element[] | undefined {
+function Actions({ actions }: IActions): JSX.Element[] | undefined {
   return actions?.map(({ action, icon, id }) => (
     <MomoizedAction
       action={action}

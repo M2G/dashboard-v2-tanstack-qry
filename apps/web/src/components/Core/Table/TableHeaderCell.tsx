@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import { memo, useMemo } from 'react';
 import { Icon } from 'ui';
 import IconNames from 'ui/components/atoms/Icon/Icons.types';
 
@@ -53,4 +53,4 @@ function TableHeaderCell({
   );
 }
 
-export default TableHeaderCell;
+export default memo(TableHeaderCell);

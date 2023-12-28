@@ -8,25 +8,22 @@ interface ITableBody {
 interface ITableRow {
   id: number | string;
   data: any;
+  indexRow: number;
 }
 
-function TableRow({ data, id }: ITableRow): JSX.Element {
+function TableRow({ data, id, indexRow }: ITableRow): JSX.Element {
   return (
-    <tbody>
-      {data?.map((row: { display: any }[], indexRow: number) => (
-        <tr
+    <tr
+      className="border-semi-10-contrast border-b-solid border-b-[1px]"
+      key={`bodyTable__${id}__${indexRow}` as string}>
+      {data?.map(({ display }: any, indexCol: number) => (
+        <td
           className="border-semi-10-contrast border-b-solid border-b-[1px]"
-          key={`bodyTable__${id}__${indexRow}` as string}>
-          {row?.map(({ display }: any, indexCol: number) => (
-            <td
-              className="border-semi-10-contrast border-b-solid border-b-[1px]"
-              key={`bodyTable__${id}__${indexCol}` as any}>
-              {display}
-            </td>
-          ))}
-        </tr>
+          key={`bodyTable__${id}__${indexCol}` as any}>
+          {display}
+        </td>
       ))}
-    </tbody>
+    </tr>
   );
 }
 
@@ -35,7 +32,16 @@ const MemoizedTableRow = memo(TableRow);
 function TableBody({ id }: ITableBody): JSX.Element {
   const { getSortedTable } = useContext(TableContext);
   return (
-    getSortedTable?.length && <MemoizedTableRow data={getSortedTable} id={id} />
+    <tbody>
+      {getSortedTable?.map((row: { display: any }[], indexRow: number) => (
+        <MemoizedTableRow
+          data={row}
+          id={id}
+          indexRow={indexRow}
+          key={`bodyTable__${id}__${indexRow}` as string}
+        />
+      ))}
+    </tbody>
   );
 }
 
