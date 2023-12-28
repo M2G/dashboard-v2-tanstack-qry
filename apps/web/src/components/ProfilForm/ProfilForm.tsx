@@ -1,10 +1,10 @@
 import type { JSX } from 'react';
 
-import { useTranslation } from 'react-i18next';
 import ROUTER_PATH from '@/constants/RouterPath';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useMemo } from 'react';
 import { useForm } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import { Button, Field } from 'ui';
 
@@ -48,9 +48,13 @@ function ProfilForm({ initialValues, onSubmit }: IForm): JSX.Element {
     <div
       className="flex h-[calc(100vh-140px)] flex-col items-center justify-center"
       id="form-profil">
-      <form className="rounded-2xl bg-white p-[25px]" onSubmit={handleSubmit(onSubmit)}>
+      <form
+        className="rounded-2xl bg-white p-[25px]"
+        onSubmit={handleSubmit(onSubmit)}>
         <div className="mb-4">
-          <h1 className="text-3xl font-bold dark:text-black">{t('form.userProfile')}</h1>
+          <h1 className="text-3xl font-bold dark:text-black">
+            {t('form.userProfile')}
+          </h1>
         </div>
         <Field
           className="_:mb-2"
@@ -76,7 +80,11 @@ function ProfilForm({ initialValues, onSubmit }: IForm): JSX.Element {
           {...{ errors, register }}
           required
         />
-        <Button className="w-full" disabled={!isValid} type="submit" variant="primary">
+        <Button
+          className="w-full"
+          disabled={!isValid}
+          type="submit"
+          variant="primary">
           {t('form.save')}
         </Button>
         <div className="c-action gab-1 mt-3 flex flex-nowrap justify-start">

@@ -11,15 +11,20 @@ interface ITableWrapper {
   rows: any;
 }
 
-function TableWrapper({ className = '', header, id, rows }: ITableWrapper): JSX.Element {
+function TableWrapper({
+  className = '',
+  header,
+  id,
+  rows,
+}: ITableWrapper): JSX.Element {
   const [sortData, setSortData] = useState<any>(null);
-  const handleSort = (index: any, sortDirection: string, type: any) => {
+  function handleSort(index: any, sortDirection: string, type: any) {
     setSortData({
       direction: sortDirection,
       index,
       type,
     } as any);
-  };
+  }
 
   const getSortedTable = useMemo(() => {
     if (!sortData) return rows;
@@ -27,7 +32,10 @@ function TableWrapper({ className = '', header, id, rows }: ITableWrapper): JSX.
 
     if (!type || type === 'string') {
       return rows?.sort(
-        (a: { [x: string]: { value: any } }, b: { [x: string]: { value: string } }) =>
+        (
+          a: { [x: string]: { value: any } },
+          b: { [x: string]: { value: string } },
+        ) =>
           direction === 'descending'
             ? a[index].value.localeCompare(b[index].value)
             : b[index].value.localeCompare(a[index].value),
@@ -35,7 +43,10 @@ function TableWrapper({ className = '', header, id, rows }: ITableWrapper): JSX.
     }
     if (type === 'date') {
       return rows?.sort(
-        (a: { [x: string]: { value: number } }, b: { [x: string]: { value: number } }) =>
+        (
+          a: { [x: string]: { value: number } },
+          b: { [x: string]: { value: number } },
+        ) =>
           direction === 'ascending'
             ? a[index].value - b[index].value
             : b[index].value - a[index].value,
@@ -52,10 +63,11 @@ function TableWrapper({ className = '', header, id, rows }: ITableWrapper): JSX.
   }, [header]);
 
   return (
-    <TableContext.Provider value={{ getSortedTable, handleSort, header, sortData }}>
+    <TableContext.Provider
+      value={{ getSortedTable, handleSort, header, sortData }}>
       <table className="c-table text-grey-dark w-full border-collapse">
-        <TableHead id={id} key="tableHead" />
-        <TableBody id={id} key="tableBody" />
+        <TableHead id={id} />
+        <TableBody id={id} />
       </table>
     </TableContext.Provider>
   );
