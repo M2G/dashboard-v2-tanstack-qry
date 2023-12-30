@@ -1,5 +1,3 @@
-import type { JSX } from 'react';
-
 import { useCallback, useContext, useEffect, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { LanguageContext } from '@/LanguageProvider';

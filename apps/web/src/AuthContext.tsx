@@ -1,6 +1,6 @@
 import type { Context, JSX, ReactNode } from 'react';
 
-import { createContext, useMemo, useState } from 'react';
+import { createContext, useContext, useMemo, useState } from 'react';
 import {
   clearAuthStorage,
   clearUserStorage,
@@ -13,6 +13,9 @@ import {
 import { jwtDecode } from 'jwt-decode';
 
 export const AuthContext: Context<NonNullable<unknown>> = createContext({});
+
+export const useAuth = () => useContext(AuthContext);
+
 interface AuthContextProps {
   children: ReactNode;
 }
