@@ -34,7 +34,7 @@ function UserList({
   canDelete = false,
   canEdit = false,
   id,
-}: UserListProps): JSX.Element | null {
+}: UserListProps): JSX.Element {
   const { t } = useTranslation();
   const [pagination, setPagination] = useState<{
     page: number;

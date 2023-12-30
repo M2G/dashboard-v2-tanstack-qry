@@ -1,13 +1,12 @@
-import { AuthContext } from '@/AuthContext';
+import { useAuth } from '@/AuthContext';
 import ChangePassordForm from '@/components/ChangePassordForm';
-import { useCallback, useContext } from 'react';
+import { useCallback } from 'react';
 import useChangePassword from './hooks';
-
 function ChangePassword(): JSX.Element {
   // const dispatch = useDispatch();
   const {
     userData: { id },
-  } = useContext(AuthContext);
+  } = useAuth();
   const { mutate } = useChangePassword();
 
   const handleSubmit = useCallback(

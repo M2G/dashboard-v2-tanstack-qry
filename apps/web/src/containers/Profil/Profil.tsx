@@ -1,11 +1,11 @@
-import { useCallback, useContext } from 'react';
-import { AuthContext } from '@/AuthContext';
+import { useCallback } from 'react';
+import { useAuth } from '@/AuthContext';
 import ProfilForm from '@/components/ProfilForm';
 
 import { useProfil, useProfilUpdate } from './hooks';
 
 function Profil(): JSX.Element | null {
-  const { userData }: { userData: { id: number } } = useContext(AuthContext);
+  const { userData }: { userData: { id: number } } = useAuth();
   const { data, isLoading } = useProfil({ id: userData?.id });
   const { mutate } = useProfilUpdate();
 
