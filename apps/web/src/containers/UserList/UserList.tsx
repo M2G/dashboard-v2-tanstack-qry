@@ -1,19 +1,14 @@
 import type { JSX, SetStateAction } from 'react';
-import { useCallback, useMemo, useState } from 'react';
-import { useTranslation } from 'react-i18next';
 
-import { Modal, Sidebar } from 'ui/components/organisms';
 import TopLineLoading from '@/components/Loading/TopLineLoading';
-
 import NoData from '@/components/NoData';
-import UserEdit from '@/components/Users/UserEdit';
 
+import UserEdit from '@/components/Users/UserEdit';
 import UserNew from '@/components/Users/UserNew';
+
 import UserFilters from '@/containers/UserFilters';
 import List from '@/containers/UserList/ListLegacy';
 
-import AddUser from './Action/AddUser';
-import userListItem from './UserListItem';
 import {
   useCreateUser,
   useDeleteUser,
@@ -21,6 +16,13 @@ import {
   useUserList,
 } from '@/containers/Users/hooks';
 import { IUser } from '@/types';
+import { useCallback, useMemo, useState } from 'react';
+
+import { useTranslation } from 'react-i18next';
+import { Modal, Sidebar } from 'ui/components/organisms';
+
+import AddUser from './Action/AddUser';
+import userListItem from './UserListItem';
 
 interface UserListProps {
   canAdd: boolean;
@@ -45,9 +47,9 @@ function UserList({
   });
   const [term, setTerm] = useState('');
   const [state, setUser] = useState<{
-    deletingUser?: any | boolean;
-    editingUser?: any | boolean;
-    newUser?: any | boolean;
+    deletingUser?: IUser | boolean;
+    editingUser?: IUser | boolean;
+    newUser?: IUser | boolean;
   }>({
     deletingUser: false,
     editingUser: false,
@@ -126,9 +128,9 @@ function UserList({
   const onNewUser = useCallback(
     (
       user: SetStateAction<{
-        deletingUser?: boolean | any;
-        editingUser?: boolean | any;
-        newUser?: boolean | any;
+        deletingUser?: IUser | boolean;
+        editingUser?: IUser | boolean;
+        newUser?: IUser | boolean;
       }>,
     ) => {
       mutateCreate({ ...user });

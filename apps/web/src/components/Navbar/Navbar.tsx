@@ -1,6 +1,6 @@
-import { useCallback, useContext, useEffect, useMemo } from 'react';
+import { useCallback, useContext, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
-import { LanguageContext } from '@/LanguageProvider';
+import { useLanguage } from '@/LanguageProvider';
 
 enum Language {
   EN = 'en',
@@ -8,7 +8,7 @@ enum Language {
 }
 
 function Navbar(): JSX.Element {
-  const { userLanguageChange, userLanguage } = useContext(LanguageContext);
+  const { userLanguage, userLanguageChange } = useLanguage();
   const { i18n } = useTranslation();
 
   const lang = useMemo(

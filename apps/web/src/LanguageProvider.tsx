@@ -1,11 +1,12 @@
 import {
-  ReactNode,
   createContext,
+  ReactNode,
+  useContext,
   useEffect,
   useMemo,
   useState,
-  useContext,
 } from 'react';
+
 import { useTranslation } from 'react-i18next';
 
 // @see https://github.com/hcoz/react-context-multilang/blob/master/src/containers/Language.js
@@ -13,7 +14,7 @@ export const LanguageContext = createContext({
   userLanguage: 'en',
 });
 
-export const useLanguageContext = () => useContext(LanguageContext);
+export const useLanguage = () => useContext(LanguageContext);
 export enum languageOptions {
   en = 'en',
   fr = 'fr',
@@ -26,7 +27,7 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
 
   const provider = {
     userLanguage,
-    userLanguageChange: (selected: string | number) => {
+    userLanguageChange: (selected: number | string) => {
       const newLanguage = languageOptions[selected] ? selected : 'en';
       setUserLanguage(newLanguage);
       window.localStorage.setItem('rcml-lang', newLanguage);
